@@ -2,21 +2,16 @@
  * @Author: tang.haoming
  * @Date: 2024-10-26 04:20:58
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-10-27 17:04:58
+ * @LastEditTime: 2024-10-27 22:50:13
  * @FilePath: /allen/src/app/(frontend)/[slug]/page.tsx
  * @Description:
  */
-import type { Metadata } from 'next'
 
-import { PayloadRedirects } from '@/components/PayloadRedirects'
 import configPromise from '@payload-config'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
-import { draftMode } from 'next/headers'
-import React, { cache } from 'react'
-import { homeStatic } from '@/endpoints/seed/home-static'
 
-import { RenderBlocks } from '@/blocks/RenderBlocks'
-import { RenderHero } from '@/heros/RenderHero'
+import React, { cache } from 'react'
+
 import PageClient from './page.client'
 
 type Args = {
