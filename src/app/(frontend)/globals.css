@@ -223,6 +223,32 @@ body {
   height: 18px;
   margin-right: 10px;
   margin-bottom: -4px;
-  background: url(https://oss-scoc.oss-cn-chengdu.aliyuncs.com/images/index/notice.png) no-repeat;
   background-size: 100% auto;
+}
+
+/* 小于640px时，每个item独占一行 */
+@media screen and (max-width: 768px) {
+  .item {
+    flex-basis: 100%; /* 占据整行 */
+    max-width: 100%; /* 最大宽度为100%，适应单行 */
+  }
+}
+@media screen and (max-width: 1000px) {
+  .imgStyle {
+    width: 130px;
+    height: 100px;
+  }
+}
+/* 大于640px时，每行两个item */
+@media screen and (min-width: 768px) {
+  .item {
+    flex-basis: calc(50% - 10px); /* 减去两侧的间隙 */
+    max-width: calc(50% - 10px); /* 最大宽度为50%，适应两列 */
+  }
+}
+@media screen and (min-width: 1000px) {
+  .imgStyle {
+    width: 240px;
+    height: 170px;
+  }
 }

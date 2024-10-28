@@ -2,19 +2,14 @@
  * @Author: tang.haoming
  * @Date: 2024-10-24 10:07:05
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-10-27 20:35:14
+ * @LastEditTime: 2024-10-28 21:03:41
  * @FilePath: /allen/src/collections/Pages/index.ts
  * @Description:
  */
 import type { CollectionConfig } from 'payload'
 
-import { generatePreviewPath } from '../../utilities/generatePreviewPath'
-
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
-import { slugField } from '@/fields/slug'
-import { authenticated } from '@/access/authenticated'
-import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -22,12 +17,7 @@ export const Pages: CollectionConfig = {
     plural: '新闻上报',
     singular: '新闻上报',
   },
-  access: {
-    create: authenticated,
-    delete: authenticated,
-    read: authenticatedOrPublished,
-    update: authenticated,
-  },
+
   admin: {
     defaultColumns: ['title', 'type', 'updatedAt'],
     livePreview: {

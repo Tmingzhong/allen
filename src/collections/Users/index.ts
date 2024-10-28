@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-26 04:20:58
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-10-26 20:27:16
+ * @LastEditTime: 2024-10-28 21:03:55
  * @FilePath: /allen/src/collections/Users/index.ts
  * @Description:
  */
@@ -16,13 +16,7 @@ const Users: CollectionConfig = {
     plural: '用户管理',
     singular: '用户管理',
   },
-  access: {
-    admin: authenticated,
-    create: authenticated,
-    delete: authenticated,
-    read: authenticated,
-    update: authenticated,
-  },
+
   admin: {
     defaultColumns: ['name', 'email'],
     useAsTitle: 'name',

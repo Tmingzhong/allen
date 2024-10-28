@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-27 16:41:51
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-10-27 21:08:17
+ * @LastEditTime: 2024-10-28 22:31:26
  * @FilePath: /allen/src/app/(frontend)/[slug]/cardTable.tsx
  * @Description:
  */
@@ -13,30 +13,32 @@ import Image from 'next/image'
 const CardTable = (props: any) => {
   const { page } = props
   console.log('123123123123123123123')
+  console.log(page)
 
   page.map((item) => {
-    console.log(`${process.env.NEXT_PUBLIC_SERVER_URL}/${item.image.url}`)
+    console.log(`${process.env.NEXT_PUBLIC_SERVER_URL}/${item?.image?.url}`)
   })
   return (
-    <div className="flex felx-row flex-wrap">
+    <div className="flex felx-row flex-wrap gap-[10px]">
       {page.map((item) => (
-        <Card key={item.id} hoverable style={{ width: '50%' }}>
-          <div className="flex flex-row">
-            <img
-              width={240}
-              height={170}
-              src={`${process.env.NEXT_PUBLIC_SERVER_URL}/${item.image.url}`}
-              alt={item.image.alt}
-            />
-            <div className="flex flex-col overflow-hidden ml-2">
-              <p className="font-bold truncate">{item.title}</p>
-              <p className="mb-4 pb-4 border-b">2021-12-04</p>
-              <div className="flex flex-auto bg-red-400">
-                <p className="font-bold text-ellipsis overflow-hidden ">{item.subTitle}</p>
+        <div key={item.id} className="item  ">
+          <Card hoverable className=" w-full h-[220px] bg-red-400">
+            <div className="flex flex-row overflow-hidden">
+              <img
+                className="imgStyle"
+                src={`${process.env.NEXT_PUBLIC_SERVER_URL}/${item.image.url}`}
+                alt={item.image.alt}
+              />
+              <div className="flex flex-col overflow-hidden ml-2 ">
+                <p className="font-bold truncate">{item.title}</p>
+                <p className="mb-4 pb-4 border-b">2021-12-04</p>
+                <p className="line-clamp-3	 font-bold whitespace-normal text-ellipsis overflow-hidden   ">
+                  {item.subTitle}
+                </p>
               </div>
             </div>
-          </div>
-        </Card>
+          </Card>
+        </div>
       ))}
     </div>
   )
