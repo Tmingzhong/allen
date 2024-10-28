@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-15 22:05:32
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-10-27 20:47:07
+ * @LastEditTime: 2024-10-28 23:47:17
  * @FilePath: /allen/src/app/(frontend)/[slug]/page.client.tsx
  * @Description:
  */
@@ -138,8 +138,10 @@ function page(props: {
               alignItems: 'center',
               fontWeight: 'bold',
               border: 0,
+              color: '#4B4A48',
             }}
             selectedKeys={[current]}
+            color="4B4A48"
             mode="horizontal"
             items={items}
           />

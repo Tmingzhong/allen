@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-27 16:41:51
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-10-28 22:33:20
+ * @LastEditTime: 2024-10-28 23:44:41
  * @FilePath: /allen/src/app/(frontend)/[slug]/cardTable.tsx
  * @Description:
  */
@@ -30,9 +30,11 @@ const CardTable = (props: any) => {
                 alt={item.image.alt}
               />
               <div className="flex flex-col overflow-hidden ml-2 ">
-                <p className="font-bold truncate">{item.title}</p>
-                <p className="mb-4 pb-4 border-b">2021-12-04</p>
-                <p className="line-clamp-3	 font-bold whitespace-normal text-ellipsis overflow-hidden   ">
+                <p className="font-bold truncate text-[#4B4A48]">{item.title}</p>
+                <p className="mb-4 pb-4 text-[14px] border-b border-[#C6C6C6] text-[#7D7D7D]">
+                  2021-12-04
+                </p>
+                <p className="line-clamp-3 text-[#7D7D7D] text-[14px]	  whitespace-normal text-ellipsis overflow-hidden   ">
                   {item.subTitle}
                 </p>
               </div>

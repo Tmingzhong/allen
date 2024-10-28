@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-26 04:20:58
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-10-27 20:38:19
+ * @LastEditTime: 2024-10-28 23:40:45
  * @FilePath: /allen/src/collections/Media.ts
  * @Description:
  */
@@ -27,6 +27,9 @@ export const Media: CollectionConfig = {
   labels: {
     plural: '图片素材',
     singular: '图片素材',
+  },
+  access: {
+    read: () => true,
   },
 
   fields: [
