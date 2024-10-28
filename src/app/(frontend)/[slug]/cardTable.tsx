@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-27 16:41:51
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-10-28 22:31:26
+ * @LastEditTime: 2024-10-28 22:33:20
  * @FilePath: /allen/src/app/(frontend)/[slug]/cardTable.tsx
  * @Description:
  */
@@ -22,8 +22,8 @@ const CardTable = (props: any) => {
     <div className="flex felx-row flex-wrap gap-[10px]">
       {page.map((item) => (
         <div key={item.id} className="item  ">
-          <Card hoverable className=" w-full h-[220px] bg-red-400">
-            <div className="flex flex-row overflow-hidden">
+          <Card hoverable className=" w-full h-[220px] ">
+            <div className="flex flex-row overflow-hidden bg-[#f7f7f7]">
               <img
                 className="imgStyle"
                 src={`${process.env.NEXT_PUBLIC_SERVER_URL}/${item.image.url}`}
