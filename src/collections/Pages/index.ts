@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-24 10:07:05
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-10-28 21:03:41
+ * @LastEditTime: 2024-10-29 23:03:06
  * @FilePath: /allen/src/collections/Pages/index.ts
  * @Description:
  */
@@ -16,6 +16,9 @@ export const Pages: CollectionConfig = {
   labels: {
     plural: '新闻上报',
     singular: '新闻上报',
+  },
+  access: {
+    read: () => true,
   },
 
   admin: {
@@ -58,7 +61,7 @@ export const Pages: CollectionConfig = {
           value: 'ywgl',
         },
         {
-          label: '景区咨询',
+          label: '景区资讯',
           value: 'jqzx',
         },
         {

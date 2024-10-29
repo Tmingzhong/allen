@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-15 22:05:32
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-10-28 23:47:17
+ * @LastEditTime: 2024-10-29 22:38:32
  * @FilePath: /allen/src/app/(frontend)/[slug]/page.client.tsx
  * @Description:
  */
@@ -52,16 +52,21 @@ interface IPage {
 }
 function page(props: {
   pageData: {
-    page: IPage
+    // page: IPage
+    resultZxdt: IPage
+    resultYwgl: IPage
+    resultJqgg: IPage
+    resultJqzx: IPage
+    resultJqhd: IPage
+    resultSwhz: IPage
     imageList: Array<IImage>
     address?: string
     phone?: string
-    logo?: string
+    slug: string
   }
 }) {
   const { pageData } = props
   console.log(pageData)
-  console.log(`${process.env.NEXT_PUBLIC_SERVER_URL}/${pageData.logo}`)
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [current, setCurrent] = useState('home')
 
@@ -79,32 +84,32 @@ function page(props: {
     {
       key: '1',
       label: '最新动态',
-      children: <CardTable page={pageData.page} />,
+      children: <CardTable page={pageData.resultZxdt} type={'zxdt'} />,
     },
     {
       key: '2',
       label: '游玩攻略',
-      children: 'Content of Tab Pane 2',
+      children: <CardTable page={pageData.resultYwgl} type={'ywgl'} />,
     },
     {
       key: '3',
       label: '景区公告',
-      children: 'Content of Tab Pane 3',
+      children: <CardTable page={pageData.resultJqgg} type={'jqgg'} />,
     },
     {
       key: '4',
       label: '景区资讯',
-      children: 'Content of Tab Pane 3',
+      children: <CardTable page={pageData.resultJqzx} type={'jqzx'} />,
     },
     {
       key: '5',
       label: '景区活动',
-      children: 'Content of Tab Pane 3',
+      children: <CardTable page={pageData.resultJqhd} type={'jqhd'} />,
     },
     {
       key: '6',
       label: '商务合作',
-      children: 'Content of Tab Pane 3',
+      children: <CardTable page={pageData.resultSwhz} type={'swhz'} />,
     },
   ]
   return (
@@ -162,7 +167,7 @@ function page(props: {
 
       <Content className="flex flex-auto flex-col  bg-[#f7f7f7] w-full h-full ">
         <SwiperCompnent imageList={pageData.imageList} />
-        <div className=" mx-10 my-10 p-4 bg-white">
+        <div className=" mx-40 my-10 p-4 bg-white min-w-96">
           <Tabs
             defaultActiveKey="1"
             tabBarExtraContent={<Button>更多</Button>}

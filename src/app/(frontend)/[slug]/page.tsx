@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-26 04:20:58
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-10-28 21:07:03
+ * @LastEditTime: 2024-10-29 22:51:01
  * @FilePath: /allen/src/app/(frontend)/[slug]/page.tsx
  * @Description:
  */
@@ -21,32 +21,84 @@ type Args = {
 }
 
 export default async function Page({ params: paramsPromise }: Args) {
-  const pageData: any = await queryPageBySlug()
+  const { slug = 'home' } = await paramsPromise
+
+  const pageData: any = await queryPageBySlug(slug)
   console.log('------------pageData------------')
 
   return <PageClient pageData={pageData} />
 }
 
-const queryPageBySlug = cache(async () => {
+const queryPageBySlug = cache(async (slug: string) => {
   const payload = await getPayloadHMR({ config: configPromise })
 
-  const result = await payload.find({
+  const resultZxdt = await payload.find({
     collection: 'pages',
+    limit: 4,
   })
-  console.log(result)
-  const result1 = await payload.findGlobal({
+  const resultYwgl = await payload.find({
+    collection: 'pages',
+    limit: slug === 'home' ? 4 : 10,
+    where: {
+      type: {
+        equals: 'ywgl',
+      },
+    },
+  })
+  const resultJqgg = await payload.find({
+    collection: 'pages',
+    limit: slug === 'home' ? 4 : 10,
+    where: {
+      type: {
+        equals: 'jqgg',
+      },
+    },
+  })
+  const resultJqzx = await payload.find({
+    collection: 'pages',
+    limit: slug === 'home' ? 4 : 10,
+    where: {
+      type: {
+        equals: 'jqzx',
+      },
+    },
+  })
+  const resultJqhd = await payload.find({
+    collection: 'pages',
+    limit: slug === 'home' ? 4 : 10,
+    where: {
+      type: {
+        equals: 'jqhd',
+      },
+    },
+  })
+  const resultSwhz = await payload.find({
+    collection: 'pages',
+    limit: slug === 'home' ? 4 : 10,
+    where: {
+      type: {
+        equals: 'swhz',
+      },
+    },
+  })
+
+  const header = await payload.findGlobal({
     slug: 'header',
   })
-  const result2 = await payload.findGlobal({
+  const footer = await payload.findGlobal({
     slug: 'footer',
   })
-  console.log('123123123123')
-  console.log(result2.logo)
 
   return {
-    page: result.docs || [],
-    imageList: result1.images,
-    address: result2.address,
-    phone: result2.phone,
+    resultZxdt: resultZxdt.docs || [],
+    resultYwgl: resultYwgl.docs || [],
+    resultJqgg: resultJqgg.docs || [],
+    resultJqzx: resultJqzx.docs || [],
+    resultJqhd: resultJqhd.docs || [],
+    resultSwhz: resultSwhz.docs || [],
+    imageList: header.images,
+    address: footer.address,
+    phone: footer.phone,
+    slug: slug,
   }
 })
