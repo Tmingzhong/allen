@@ -202,7 +202,10 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
               )
             }
             case 'upload': {
+              console.log('1231231313123123')
+
               const value = node.value as any
+              console.log(value)
 
               return (
                 <Image
