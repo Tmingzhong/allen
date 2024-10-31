@@ -202,7 +202,6 @@ export interface Footer {
   id: number;
   address?: string | null;
   phone?: number | null;
-  logo?: (number | null) | Media;
   updatedAt?: string | null;
   createdAt?: string | null;
 }

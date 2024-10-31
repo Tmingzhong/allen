@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-27 16:41:51
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-10-30 23:29:27
+ * @LastEditTime: 2024-10-31 22:38:33
  * @FilePath: /allen/src/app/(frontend)/[...slug]/cardTable.tsx
  * @Description:
  */
@@ -12,7 +12,7 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 const CardTable = (props: any) => {
-  const { page } = props
+  const { page,isList,type } = props
   const router = useRouter()
 
   const [loading, setLoading] = useState(false)
@@ -37,7 +37,7 @@ const CardTable = (props: any) => {
         // window.dispatchEvent(new Event('resize'))
       })
   }
-  const loadMore = !loading ? (
+  const loadMore = !loading&&isList ? (
     <div
       style={{
         display: 'flex',
