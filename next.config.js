@@ -18,10 +18,6 @@ const nextConfig = {
     remotePatterns: [
       ...[NEXT_PUBLIC_SERVER_URL, 'https://oss-scoc.oss-cn-chengdu.aliyuncs.com'].map((item) => {
         const url = new URL(item)
-        console.log('urlurl')
-
-        console.log(url)
-
         return {
           hostname: url.hostname,
           protocol: url.protocol.replace(':', ''),
