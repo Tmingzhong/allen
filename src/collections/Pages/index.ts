@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-24 10:07:05
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-10-29 23:03:06
+ * @LastEditTime: 2024-11-01 23:29:17
  * @FilePath: /allen/src/collections/Pages/index.ts
  * @Description:
  */
@@ -32,7 +32,7 @@ export const Pages: CollectionConfig = {
 
         // console.log(path)
 
-        return `${process.env.NEXT_PUBLIC_SERVER_URL}/posts/${data.slug}`
+        return `${process.env.NEXT_PUBLIC_SERVER_URL}/details/${data.slug}`
       },
     },
     useAsTitle: 'title',

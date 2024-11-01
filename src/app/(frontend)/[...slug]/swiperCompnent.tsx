@@ -2,8 +2,8 @@
  * @Author: tang.haoming
  * @Date: 2024-10-26 21:55:14
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-10-27 20:04:51
- * @FilePath: /allen/src/app/(frontend)/[slug]/swiperCompnent.tsx
+ * @LastEditTime: 2024-11-01 23:46:45
+ * @FilePath: /allen/src/app/(frontend)/[...slug]/swiperCompnent.tsx
  * @Description:
  */
 'use client'
@@ -20,17 +20,12 @@ import { Autoplay, Pagination, Navigation } from 'swiper/modules'
 import arrowDwon from '../../../../public/arrow-dwon.png'
 export interface IStepProgress {
   imageList: Array<IImage>
+  slug:string
+  title:string
 }
 const swiperCompnent = (props: IStepProgress) => {
-  const { imageList } = props
-  console.log(imageList)
-  console.log('process.env.NEXT_PUBLIC_SERVER_URLprocess.env.NEXT_PUBLIC_SERVER_URL')
-  console.log(process.env.NEXT_PUBLIC_SERVER_URL)
-  {
-    imageList.map((item, index) => {
-      console.log(`${process.env.NEXT_PUBLIC_SERVER_URL}/${item.image.url}`)
-    })
-  }
+  const { imageList,title='',slug } = props
+
   return (
     <div className="homePage relative ">
       <Swiper
@@ -62,7 +57,7 @@ const swiperCompnent = (props: IStepProgress) => {
       </Swiper>
 
       <div className="ui-arrow-down">
-        <Image src={arrowDwon} alt={''} />
+        <Image src={arrowDwon} alt={'arrowDwon'} />
       </div>
 
       <div className="notice-line z-50 flex items-center p-4 justify-around">
@@ -73,7 +68,7 @@ const swiperCompnent = (props: IStepProgress) => {
               paddingRight: '8px',
             }}
           />
-          <a href="">最新动态：八万多元金饰遗落民宿 暖心店主完璧归赵</a>
+          <a href={`/details/${slug}`} >{`最新动态：${title}`}</a>
         </div>
         {/* <SlideNextButton /> */}
       </div>

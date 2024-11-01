@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-27 16:41:51
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-10-31 22:38:33
+ * @LastEditTime: 2024-11-01 23:09:35
  * @FilePath: /allen/src/app/(frontend)/[...slug]/cardTable.tsx
  * @Description:
  */
@@ -12,24 +12,27 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 const CardTable = (props: any) => {
-  const { page,isList,type } = props
+  const { page, isList, type } = props
   const router = useRouter()
 
   const [loading, setLoading] = useState(false)
 
-  const [data, setData] = useState<any>(page)
   const [list, setList] = useState<any>(page)
 
   const onLoadMore = () => {
     setLoading(true)
 
-    fetch('/api/pages?')
+    fetch(
+      '/api/myRouter?' +
+        new URLSearchParams({
+          type: type,
+        }),
+    )
       .then((res) => res.json())
       .then((res) => {
         console.log(res)
-        const newData = data.concat(res.docs)
-        setData(newData)
-        setList(newData)
+
+        setList(res.docs)
         setLoading(false)
         // Resetting window's offsetTop so as to display react-virtualized demo underfloor.
         // In real scene, you can using public method of react-virtualized:
@@ -37,21 +40,22 @@ const CardTable = (props: any) => {
         // window.dispatchEvent(new Event('resize'))
       })
   }
-  const loadMore = !loading&&isList ? (
-    <div
-      style={{
-        display: 'flex',
-        flexBasis: '100%',
-        justifyContent: 'center',
-        textAlign: 'center',
-        marginTop: 12,
-        height: 32,
-        lineHeight: '32px',
-      }}
-    >
-      <Button onClick={onLoadMore}>loading more</Button>
-    </div>
-  ) : null
+  const loadMore =
+    !loading && isList ? (
+      <div
+        style={{
+          display: 'flex',
+          flexBasis: '100%',
+          justifyContent: 'center',
+          textAlign: 'center',
+          marginTop: 12,
+          height: 32,
+          lineHeight: '32px',
+        }}
+      >
+        <Button onClick={onLoadMore}>加载更多</Button>
+      </div>
+    ) : null
   return (
     <div className="flex felx-row flex-wrap gap-[10px] ">
       {/* <List
@@ -86,7 +90,11 @@ const CardTable = (props: any) => {
 
       {list.map((item) => (
         <div key={item.id} className="item  ">
-          <Card hoverable onClick={() => router.push(`/details/${item.slug}`)} className=" w-full h-[220px] ">
+          <Card
+            hoverable
+            onClick={() => router.push(`/details/${item.slug}`)}
+            className=" w-full h-[220px] "
+          >
             <div className="flex flex-row overflow-hidden bg-[#f7f7f7]">
               <img
                 className="imgStyle"

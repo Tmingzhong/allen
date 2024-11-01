@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-15 22:05:32
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-10-31 23:14:08
+ * @LastEditTime: 2024-11-01 23:47:09
  * @FilePath: /allen/src/app/(frontend)/[...slug]/page.client.tsx
  * @Description:
  */
@@ -62,7 +62,7 @@ interface IPage {
 function Page(props: {
   pageData: {
     // page: IPage
-    resultZxdt: IPage
+    resultZxdt: IPage[]
     resultYwgl: IPage
     resultJqgg: IPage
     resultJqzx: IPage
@@ -82,6 +82,7 @@ function Page(props: {
   const isDetails = pageData.slug[0] === 'details'
   const isList = pageData.slug[0] === 'list'
   const isHome = pageData.slug[0] === 'home'
+  console.log(isDetails,isList,isHome)
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [current, setCurrent] = useState('home')
@@ -90,16 +91,31 @@ function Page(props: {
   
   const router = useRouter()
   useEffect(()=>{
+    if(pageData.slug[0] === 'list'&&!pageData.slug[1]){
+      setActiveKey('jqzx')
+      setCurrent('jqzx')
+    }
+
     if(pageData.slug[0] === 'list'&&pageData.slug[1]){
       setCurrent(pageData.slug[1])
       setActiveKey(pageData.slug[1])
     }
+    if(pageData.slug[0] === 'details'&&pageData.slug[1]){
+      setCurrent(pageData.slug[1])
+    }
   },[pageData.slug])
 
   const onClick = (e) => {
+   
     console.log('click ', e)
     setCurrent(e.key)
-    router.push(`/list/${e.key}`)
+    if(e.key==='home'){
+      router.push(`/`)
+
+    }else{
+      router.push(`/list/${e.key}`)
+
+    }
   }
   const handleChange = (value: string) => {
     console.log(`selected ${value}`)
@@ -224,7 +240,7 @@ function Page(props: {
 
       <Content className="flex flex-auto flex-col  bg-[#f7f7f7] w-full h-full ">
         {isHome ? (
-          <SwiperCompnent imageList={pageData.imageList} />
+          <SwiperCompnent imageList={pageData.imageList} slug={pageData?.resultZxdt[0].slug} title={pageData?.resultZxdt[0].title}/>
         ) : (
           <Image
             className=" w-full h-[500px] object-cover	"
