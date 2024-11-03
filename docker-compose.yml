@@ -32,6 +32,10 @@ services:
   postgres:
     restart: always
     image: postgres:latest
+    environment:
+      POSTGRES_DB: allen
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
     volumes:
       - pgdata:/var/lib/postgresql/data
     ports:
