@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-27 16:41:51
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-01 23:09:35
+ * @LastEditTime: 2024-11-03 19:30:54
  * @FilePath: /allen/src/app/(frontend)/[...slug]/cardTable.tsx
  * @Description:
  */
@@ -12,7 +12,7 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 const CardTable = (props: any) => {
-  const { page, isList, type } = props
+  const { page, isList, type,lang,more } = props
   const router = useRouter()
 
   const [loading, setLoading] = useState(false)
@@ -53,7 +53,7 @@ const CardTable = (props: any) => {
           lineHeight: '32px',
         }}
       >
-        <Button onClick={onLoadMore}>加载更多</Button>
+        <Button onClick={onLoadMore}>{more}</Button>
       </div>
     ) : null
   return (
@@ -92,7 +92,7 @@ const CardTable = (props: any) => {
         <div key={item.id} className="item  ">
           <Card
             hoverable
-            onClick={() => router.push(`/details/${item.slug}`)}
+            onClick={() => router.push(`/${lang}/details/${item.slug}`)}
             className=" w-full h-[220px] "
           >
             <div className="flex flex-row overflow-hidden bg-[#f7f7f7]">

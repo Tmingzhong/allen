@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-15 22:05:32
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-01 23:47:09
+ * @LastEditTime: 2024-11-03 19:33:00
  * @FilePath: /allen/src/app/(frontend)/[...slug]/page.client.tsx
  * @Description:
  */
@@ -22,26 +22,6 @@ const { Header, Content, Footer } = Layout
 import '../globals.css'
 import CardTable from './cardTable'
 import RichText from '@/components/RichText'
-const items = [
-  {
-    label: '首页',
-    key: 'home',
-  },
-  {
-    label: '景区资讯',
-    key: 'jqzx',
-    children: [
-      { label: '景区资讯', key: 'jqzx' },
-      { label: '景区活动', key: 'jqhd' },
-      { label: '游玩攻略', key: 'ywgl' },
-      { label: '景区公告', key: 'jqgg' },
-    ],
-  },
-  {
-    label: '商务合作',
-    key: 'swhz',
-  },
-]
 
 export interface IImage {
   url: string
@@ -72,38 +52,47 @@ function Page(props: {
     address?: string
     phone?: string
     slug: string[]
-    detailContent: any
+    detailContent: any,
+    dict
   }
 }) {
-  const { pageData } = props
+
   
+  const { pageData } = props
+
+  const {dict} = pageData
+
   console.log(pageData)
   console.log('detailData------>', pageData.detailContent)
-  const isDetails = pageData.slug[0] === 'details'
-  const isList = pageData.slug[0] === 'list'
-  const isHome = pageData.slug[0] === 'home'
+  const isDetails = pageData.slug[1] === 'details'
+  const isList = pageData.slug[1] === 'list'
+  const isHome = pageData.slug[1] === 'home'
+  const lang = pageData.slug[0]
   console.log(isDetails,isList,isHome)
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [current, setCurrent] = useState('home')
   const [activeKey, setActiveKey] = useState('zxdt')
+  const [langValue, setLangValue] = useState(lang)
+
+  
 
   
   const router = useRouter()
   useEffect(()=>{
-    if(pageData.slug[0] === 'list'&&!pageData.slug[1]){
+    if(pageData.slug[1] === 'list'&&!pageData.slug[2]){
       setActiveKey('jqzx')
       setCurrent('jqzx')
     }
 
-    if(pageData.slug[0] === 'list'&&pageData.slug[1]){
-      setCurrent(pageData.slug[1])
-      setActiveKey(pageData.slug[1])
+    if(pageData.slug[1] === 'list'&&pageData.slug[2]){
+      setCurrent(pageData.slug[2])
+      setActiveKey(pageData.slug[2])
     }
-    if(pageData.slug[0] === 'details'&&pageData.slug[1]){
-      setCurrent(pageData.slug[1])
+    if(pageData.slug[1] === 'details'){
+      setCurrent(pageData.detailContent.type)
     }
-  },[pageData.slug])
+  },[pageData?.detailContent?.type, pageData.slug])
 
   const onClick = (e) => {
    
@@ -113,12 +102,14 @@ function Page(props: {
       router.push(`/`)
 
     }else{
-      router.push(`/list/${e.key}`)
+      router.push(`/${lang}/list/${e.key}`)
 
     }
   }
+  // 改语言
   const handleChange = (value: string) => {
-    console.log(`selected ${value}`)
+    setLangValue(value)
+    router.push(`/${value}`)
   }
   const onChange = (key: string) => {
     setActiveKey(key)
@@ -126,63 +117,63 @@ function Page(props: {
   const tabItems: TabsProps['items'] = [
     {
       key: 'zxdt',
-      label: '最新动态',
-      children: <CardTable isList={isList} page={pageData.resultZxdt} type={'zxdt'} />,
+      label: dict.zxdt,
+      children: <CardTable mroe={dict.more} lang={lang} isList={isList} page={pageData.resultZxdt} type={'zxdt'} />,
     },
     {
       key: 'jqzx',
-      label: '景区资讯',
-      children: <CardTable isList={isList} page={pageData.resultJqzx} type={'jqzx'} />,
+      label: dict.jqzx,
+      children: <CardTable mroe={dict.more} lang={lang} isList={isList} page={pageData.resultJqzx} type={'jqzx'} />,
     },
     {
       key: 'ywgl',
-      label: '游玩攻略',
-      children: <CardTable isList={isList} page={pageData.resultYwgl} type={'ywgl'} />,
+      label: dict.ywgl,
+      children: <CardTable mroe={dict.more} lang={lang} isList={isList} page={pageData.resultYwgl} type={'ywgl'} />,
     },
     {
       key: 'jqgg',
-      label: '景区公告',
-      children: <CardTable isList={isList} page={pageData.resultJqgg} type={'jqgg'} />,
+      label: dict.jqgg,
+      children: <CardTable mroe={dict.more} lang={lang} isList={isList} page={pageData.resultJqgg} type={'jqgg'} />,
     },
 
     {
       key: 'jqhd',
-      label: '景区活动',
-      children: <CardTable isList={isList} page={pageData.resultJqhd} type={'jqhd'} />,
+      label: dict.jqgg,
+      children: <CardTable mroe={dict.more} lang={lang} isList={isList} page={pageData.resultJqhd} type={'jqhd'} />,
     },
     {
       key: 'swhz',
-      label: '商务合作',
-      children: <CardTable isList={isList} page={pageData.resultSwhz} type={'swhz'} />,
+      label: dict.jqgg,
+      children: <CardTable mroe={dict.more} lang={lang} isList={isList} page={pageData.resultSwhz} type={'swhz'} />,
     },
   ]
   const tabItems2: TabsProps['items'] = [
 
     {
       key: 'jqzx',
-      label: '景区资讯',
-      children: <CardTable isList={isList} page={pageData.resultJqzx} type={'jqzx'} />,
+      label: dict.jqgg,
+      children: <CardTable mroe={dict.more} lang={lang} isList={isList} page={pageData.resultJqzx} type={'jqzx'} />,
     },
     {
       key: 'ywgl',
-      label: '游玩攻略',
-      children: <CardTable isList={isList} page={pageData.resultYwgl} type={'ywgl'} />,
+      label: dict.ywgl,
+      children: <CardTable mroe={dict.more} lang={lang} isList={isList} page={pageData.resultYwgl} type={'ywgl'} />,
     },
     {
       key: 'jqgg',
-      label: '景区公告',
-      children: <CardTable isList={isList} page={pageData.resultJqgg} type={'jqgg'} />,
+      label:dict.jqgg,
+      children: <CardTable mroe={dict.more} lang={lang} isList={isList} page={pageData.resultJqgg} type={'jqgg'} />,
     },
 
     {
       key: 'jqhd',
-      label: '景区活动',
-      children: <CardTable isList={isList} page={pageData.resultJqhd} type={'jqhd'} />,
+      label: dict.jqhd,
+      children: <CardTable mroe={dict.more} lang={lang} isList={isList} page={pageData.resultJqhd} type={'jqhd'} />,
     },
     {
       key: 'swhz',
-      label: '商务合作',
-      children: <CardTable isList={isList} page={pageData.resultSwhz} type={'swhz'} />,
+      label: dict.swhz,
+      children: <CardTable mroe={dict.more} lang={lang} isList={isList} page={pageData.resultSwhz} type={'swhz'} />,
     },
   ]
   return (
@@ -221,17 +212,36 @@ function Page(props: {
             selectedKeys={[current]}
             color="4B4A48"
             mode="horizontal"
-            items={items}
+            items={[
+              {
+                label: dict.home,
+                key: 'home',
+              },
+              {
+                label: dict.jqzx,
+                key: 'jqzx',
+                children: [
+                  { label:  dict.jqzx, key: 'jqzx' },
+                  { label:  dict.jqhd, key: 'jqhd' },
+                  { label:  dict.ywgl, key: 'ywgl' },
+                  { label: dict.jqgg, key: 'jqgg' },
+                ],
+              },
+              {
+                label: dict.swhz,
+                key: 'swhz',
+              },
+            ]}
           />
           <div className="flex justify-center bg-[#f7f7f7] items-center ">
             <Select
-              defaultValue="cn"
+              defaultValue={langValue}
               style={{ width: 100 }}
               onChange={handleChange}
               options={[
-                { value: 'cn', label: '中文' },
-                { value: 'en', label: '英文' },
-                { value: 'Yiminghe', label: 'yiminghe' },
+                { value: 'zh', label: '中文' },
+                { value: 'en', label: 'English' },
+                { value: 'ko', label: '한국어' },
               ]}
             />
           </div>
@@ -256,12 +266,12 @@ function Page(props: {
                 {pageData.detailContent.title}
               </p>
               <div className="flex justify-around text-[#555555]">
-                <p>{`文章来源：${pageData.detailContent.source ? pageData.detailContent.source : '未知'}`}</p>
-                <p>{`作者：${pageData.detailContent.authar ? pageData.detailContent.authar : '未知'}`}</p>
-                <p>{`发布时间：${pageData.detailContent.publishedAt ? pageData.detailContent.publishedAt.slice(0, 10) : '未知'}`}</p>
+                <p>{`${dict.source}：${pageData.detailContent.source ? pageData.detailContent.source : '未知'}`}</p>
+                <p>{`${dict.author}：${pageData.detailContent.authar ? pageData.detailContent.authar : '未知'}`}</p>
+                <p>{`${dict.pubdate}：${pageData.detailContent.publishedAt ? pageData.detailContent.publishedAt.slice(0, 10) : '未知'}`}</p>
               </div>
               <div className="mt-8 mx-4 bg-red-100 p-4 text-start text-[#555555]">
-                {`文章摘要：${pageData.detailContent.subTitle}`}
+                {`${dict.summary}：${pageData.detailContent.subTitle}`}
               </div>
             </div>
             <RichText
@@ -274,7 +284,7 @@ function Page(props: {
           <div className=" mx-40 my-10 p-4 bg-white min-w-96">
             <Tabs
               activeKey={activeKey}
-              tabBarExtraContent={!isList? <Button onClick={() => router.push('/list')}>更多</Button>:null}
+              tabBarExtraContent={!isList? <Button onClick={() => router.push(`/${lang}/list`)}>{`${dict.more}`}</Button>:null}
               items={isList?tabItems2:tabItems}
               onChange={onChange}
             />
@@ -282,8 +292,8 @@ function Page(props: {
         )}
       </Content>
       <Footer style={{ textAlign: 'center', backgroundColor: 'black', color: '#999' }}>
-        <span> {`联系地址：${pageData.address}`}</span>
-        <span  className='ml-8'> {`联系电话：${pageData.phone}`}</span>
+        <span> {`${dict.address}：${pageData.address}`}</span>
+        <span  className='ml-8'> {`${dict.phone}：${pageData.phone}`}</span>
       </Footer>
     </Layout>
   )

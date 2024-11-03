@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-26 04:20:58
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-10-30 23:08:54
+ * @LastEditTime: 2024-11-03 19:19:49
  * @FilePath: /allen/src/app/(frontend)/[...slug]/page.tsx
  * @Description:
  */
@@ -13,6 +13,7 @@ import { getPayloadHMR } from '@payloadcms/next/utilities'
 import React, { cache } from 'react'
 
 import PageClient from './page.client'
+import { getDictionary } from '@/dictionaries'
 
 type Args = {
   params: Promise<{
@@ -21,7 +22,10 @@ type Args = {
 }
 
 export default async function Page({ params: paramsPromise }: Args) {
-  const { slug = ['home'] } = await paramsPromise
+  const a = await paramsPromise
+  console.log('123123123')
+  console.log(a)
+  const { slug = ['zh','home'] } = await paramsPromise
 
 
 
@@ -38,7 +42,7 @@ const queryPageBySlug = cache(async (slug: string[]) => {
   })
   const resultYwgl = await payload.find({
     collection: 'pages',
-    limit: slug[0] === 'home' ? 4 : 10,
+    limit: slug[1] === 'home' ? 4 : 10,
     where: {
       type: {
         equals: 'ywgl',
@@ -47,7 +51,7 @@ const queryPageBySlug = cache(async (slug: string[]) => {
   })
   const resultJqgg = await payload.find({
     collection: 'pages',
-    limit: slug[0] === 'home' ? 4 : 10,
+    limit: slug[1] === 'home' ? 4 : 10,
     where: {
       type: {
         equals: 'jqgg',
@@ -56,7 +60,7 @@ const queryPageBySlug = cache(async (slug: string[]) => {
   })
   const resultJqzx = await payload.find({
     collection: 'pages',
-    limit: slug[0] === 'home' ? 4 : 10,
+    limit: slug[1] === 'home' ? 4 : 10,
     where: {
       type: {
         equals: 'jqzx',
@@ -65,7 +69,7 @@ const queryPageBySlug = cache(async (slug: string[]) => {
   })
   const resultJqhd = await payload.find({
     collection: 'pages',
-    limit: slug[0] === 'home' ? 4 : 10,
+    limit: slug[1] === 'home' ? 4 : 10,
     where: {
       type: {
         equals: 'jqhd',
@@ -74,7 +78,7 @@ const queryPageBySlug = cache(async (slug: string[]) => {
   })
   const resultSwhz = await payload.find({
     collection: 'pages',
-    limit: slug[0] === 'home' ? 4 : 10,
+    limit: slug[1] === 'home' ? 4 : 10,
     where: {
       type: {
         equals: 'swhz',
@@ -86,7 +90,7 @@ const queryPageBySlug = cache(async (slug: string[]) => {
     collection: 'pages',
     where: {
       slug: {
-        equals: slug[1],
+        equals: slug[2],
       },
     },
   })
@@ -97,9 +101,8 @@ const queryPageBySlug = cache(async (slug: string[]) => {
   const footer = await payload.findGlobal({
     slug: 'footer',
   })
-  console.log('------------pageData------------')
+  const dict = await getDictionary(slug&&slug.length>0?slug[0]:'zh'); // en
 
-  console.log(resultDetails)
 
   return {
     resultZxdt: resultZxdt.docs || [],
@@ -112,6 +115,7 @@ const queryPageBySlug = cache(async (slug: string[]) => {
     address: footer.address,
     phone: footer.phone,
     slug:slug,
-    detailContent:resultDetails.docs[0]
+    detailContent:resultDetails.docs[0],
+    dict
   }
 })
