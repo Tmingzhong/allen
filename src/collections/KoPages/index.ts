@@ -1,5 +1,13 @@
 /*
  * @Author: tang.haoming
+ * @Date: 2024-11-03 20:58:45
+ * @LastEditors: tang.haoming
+ * @LastEditTime: 2024-11-03 22:13:16
+ * @FilePath: /allen/src/collections/KoPages/index.ts
+ * @Description:
+ */
+/*
+ * @Author: tang.haoming
  * @Date: 2024-10-24 10:07:05
  * @LastEditors: tang.haoming
  * @LastEditTime: 2024-11-03 20:58:17
@@ -11,11 +19,11 @@ import type { CollectionConfig } from 'payload'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 
-export const Pages: CollectionConfig = {
-  slug: 'pages',
+export const KoPages: CollectionConfig = {
+  slug: 'koPages',
   labels: {
-    plural: '中文新闻上报',
-    singular: '中文新闻上报',
+    plural: '韩文新闻上报',
+    singular: '韩文新闻上报',
   },
   access: {
     read: () => true,

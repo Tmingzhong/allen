@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-26 04:20:58
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-10-27 22:47:56
+ * @LastEditTime: 2024-11-03 22:13:41
  * @FilePath: /allen/src/payload.config.ts
  * @Description:
  */
@@ -28,6 +28,8 @@ import Users from './collections/Users'
 
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
+import { EnPages } from './collections/EnPages'
+import { KoPages } from './collections/KoPages'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -85,7 +87,7 @@ export default buildConfig({
     },
   }),
 
-  collections: [Pages, Media, Users],
+  collections: [Pages, Media, Users, KoPages, EnPages],
   cors: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),
   csrf: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),
   globals: [Header, Footer],

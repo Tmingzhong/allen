@@ -2,8 +2,8 @@
  * @Author: tang.haoming
  * @Date: 2024-10-24 10:07:05
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-03 20:58:17
- * @FilePath: /allen/src/collections/Pages/index.ts
+ * @LastEditTime: 2024-11-03 22:13:24
+ * @FilePath: /allen/src/collections/EnPages/index.ts
  * @Description:
  */
 import type { CollectionConfig } from 'payload'
@@ -11,11 +11,11 @@ import type { CollectionConfig } from 'payload'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 
-export const Pages: CollectionConfig = {
-  slug: 'pages',
+export const EnPages: CollectionConfig = {
+  slug: 'enPages',
   labels: {
-    plural: '中文新闻上报',
-    singular: '中文新闻上报',
+    plural: '英文新闻上报',
+    singular: '英文中文新闻上报',
   },
   access: {
     read: () => true,

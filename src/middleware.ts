@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-11-03 13:45:59
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-03 15:19:15
+ * @LastEditTime: 2024-11-03 21:07:49
  * @FilePath: /allen/src/middleware.ts
  * @Description:
  */
@@ -28,7 +28,10 @@ const middleware = async (request: NextRequest) => {
   console.log(cookieStore.get('lang'))
 
   // 如果没有带语言
-  if (NEXT_PUBLIC_LOCALES.every((v) => !pathname.startsWith(`/${v}`))) {
+  if (
+    NEXT_PUBLIC_LOCALES.every((v) => !pathname.startsWith(`/${v}`)) &&
+    pathname.indexOf('api') === -1
+  ) {
     console.log('进这里来了？')
     // 重写
     const lang = cookieStore.get('lang') ? cookieStore.get('lang')?.value : DEFAULT_LOCALE
@@ -42,7 +45,10 @@ const middleware = async (request: NextRequest) => {
     // 如需要重定向, 可使用 NextResponse.redirect
   }
   // 这里是选择语言的时候 过来的/zh /en /ko,所以在选择的时候保存
-  if (pathname === '/en' || pathname === '/zh' || pathname === '/ko') {
+  if (
+    (pathname === '/en' || pathname === '/zh' || pathname === '/ko') &&
+    pathname.indexOf('api') === -1
+  ) {
     console.log('进来了吗。。。。。')
     console.log(pathname.slice(1))
     cookieStore.set('lang', pathname.slice(1))

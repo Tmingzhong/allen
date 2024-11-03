@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-15 22:05:32
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-03 19:33:00
+ * @LastEditTime: 2024-11-03 21:11:10
  * @FilePath: /allen/src/app/(frontend)/[...slug]/page.client.tsx
  * @Description:
  */
@@ -118,33 +118,33 @@ function Page(props: {
     {
       key: 'zxdt',
       label: dict.zxdt,
-      children: <CardTable mroe={dict.more} lang={lang} isList={isList} page={pageData.resultZxdt} type={'zxdt'} />,
+      children: <CardTable more={dict.more} lang={lang} isList={isList} page={pageData.resultZxdt} type={'zxdt'} />,
     },
     {
       key: 'jqzx',
       label: dict.jqzx,
-      children: <CardTable mroe={dict.more} lang={lang} isList={isList} page={pageData.resultJqzx} type={'jqzx'} />,
+      children: <CardTable more={dict.more} lang={lang} isList={isList} page={pageData.resultJqzx} type={'jqzx'} />,
     },
     {
       key: 'ywgl',
       label: dict.ywgl,
-      children: <CardTable mroe={dict.more} lang={lang} isList={isList} page={pageData.resultYwgl} type={'ywgl'} />,
+      children: <CardTable more={dict.more} lang={lang} isList={isList} page={pageData.resultYwgl} type={'ywgl'} />,
     },
     {
       key: 'jqgg',
       label: dict.jqgg,
-      children: <CardTable mroe={dict.more} lang={lang} isList={isList} page={pageData.resultJqgg} type={'jqgg'} />,
+      children: <CardTable more={dict.more} lang={lang} isList={isList} page={pageData.resultJqgg} type={'jqgg'} />,
     },
 
     {
       key: 'jqhd',
       label: dict.jqgg,
-      children: <CardTable mroe={dict.more} lang={lang} isList={isList} page={pageData.resultJqhd} type={'jqhd'} />,
+      children: <CardTable more={dict.more} lang={lang} isList={isList} page={pageData.resultJqhd} type={'jqhd'} />,
     },
     {
       key: 'swhz',
       label: dict.jqgg,
-      children: <CardTable mroe={dict.more} lang={lang} isList={isList} page={pageData.resultSwhz} type={'swhz'} />,
+      children: <CardTable more={dict.more} lang={lang} isList={isList} page={pageData.resultSwhz} type={'swhz'} />,
     },
   ]
   const tabItems2: TabsProps['items'] = [
@@ -152,28 +152,28 @@ function Page(props: {
     {
       key: 'jqzx',
       label: dict.jqgg,
-      children: <CardTable mroe={dict.more} lang={lang} isList={isList} page={pageData.resultJqzx} type={'jqzx'} />,
+      children: <CardTable more={dict.more} lang={lang} isList={isList} page={pageData.resultJqzx} type={'jqzx'} />,
     },
     {
       key: 'ywgl',
       label: dict.ywgl,
-      children: <CardTable mroe={dict.more} lang={lang} isList={isList} page={pageData.resultYwgl} type={'ywgl'} />,
+      children: <CardTable more={dict.more} lang={lang} isList={isList} page={pageData.resultYwgl} type={'ywgl'} />,
     },
     {
       key: 'jqgg',
       label:dict.jqgg,
-      children: <CardTable mroe={dict.more} lang={lang} isList={isList} page={pageData.resultJqgg} type={'jqgg'} />,
+      children: <CardTable more={dict.more} lang={lang} isList={isList} page={pageData.resultJqgg} type={'jqgg'} />,
     },
 
     {
       key: 'jqhd',
       label: dict.jqhd,
-      children: <CardTable mroe={dict.more} lang={lang} isList={isList} page={pageData.resultJqhd} type={'jqhd'} />,
+      children: <CardTable more={dict.more} lang={lang} isList={isList} page={pageData.resultJqhd} type={'jqhd'} />,
     },
     {
       key: 'swhz',
       label: dict.swhz,
-      children: <CardTable mroe={dict.more} lang={lang} isList={isList} page={pageData.resultSwhz} type={'swhz'} />,
+      children: <CardTable more={dict.more} lang={lang} isList={isList} page={pageData.resultSwhz} type={'swhz'} />,
     },
   ]
   return (
