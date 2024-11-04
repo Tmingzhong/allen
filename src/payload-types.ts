@@ -14,6 +14,8 @@ export interface Config {
     pages: Page;
     media: Media;
     users: User;
+    koPages: KoPage;
+    enPages: EnPage;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -120,6 +122,72 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "koPages".
+ */
+export interface KoPage {
+  id: number;
+  title: string;
+  subTitle: string;
+  type: 'ywgl' | 'jqzx' | 'jqhd' | 'jqgg' | 'swhz';
+  image: number | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  publishedAt?: string | null;
+  authar?: string | null;
+  source?: string | null;
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "enPages".
+ */
+export interface EnPage {
+  id: number;
+  title: string;
+  subTitle: string;
+  type: 'ywgl' | 'jqzx' | 'jqhd' | 'jqgg' | 'swhz';
+  image: number | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  publishedAt?: string | null;
+  authar?: string | null;
+  source?: string | null;
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -136,6 +204,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'users';
         value: number | User;
+      } | null)
+    | ({
+        relationTo: 'koPages';
+        value: number | KoPage;
+      } | null)
+    | ({
+        relationTo: 'enPages';
+        value: number | EnPage;
       } | null);
   globalSlug?: string | null;
   user: {

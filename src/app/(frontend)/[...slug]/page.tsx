@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-26 04:20:58
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-03 19:19:49
+ * @LastEditTime: 2024-11-04 22:05:30
  * @FilePath: /allen/src/app/(frontend)/[...slug]/page.tsx
  * @Description:
  */
@@ -25,9 +25,7 @@ export default async function Page({ params: paramsPromise }: Args) {
   const a = await paramsPromise
   console.log('123123123')
   console.log(a)
-  const { slug = ['zh','home'] } = await paramsPromise
-
-
+  const { slug = ['zh', 'home'] } = await paramsPromise
 
   const pageData: any = await queryPageBySlug(slug)
   return <PageClient pageData={pageData} />
@@ -36,12 +34,14 @@ export default async function Page({ params: paramsPromise }: Args) {
 const queryPageBySlug = cache(async (slug: string[]) => {
   const payload = await getPayloadHMR({ config: configPromise })
 
+  const collection = slug[0] === 'zh' ? 'pages' : slug[0] === 'en' ? 'enPages' : 'koPages'
+
   const resultZxdt = await payload.find({
-    collection: 'pages',
+    collection: collection,
     limit: 4,
   })
   const resultYwgl = await payload.find({
-    collection: 'pages',
+    collection: collection,
     limit: slug[1] === 'home' ? 4 : 10,
     where: {
       type: {
@@ -50,7 +50,7 @@ const queryPageBySlug = cache(async (slug: string[]) => {
     },
   })
   const resultJqgg = await payload.find({
-    collection: 'pages',
+    collection: collection,
     limit: slug[1] === 'home' ? 4 : 10,
     where: {
       type: {
@@ -59,7 +59,7 @@ const queryPageBySlug = cache(async (slug: string[]) => {
     },
   })
   const resultJqzx = await payload.find({
-    collection: 'pages',
+    collection: collection,
     limit: slug[1] === 'home' ? 4 : 10,
     where: {
       type: {
@@ -68,7 +68,7 @@ const queryPageBySlug = cache(async (slug: string[]) => {
     },
   })
   const resultJqhd = await payload.find({
-    collection: 'pages',
+    collection: collection,
     limit: slug[1] === 'home' ? 4 : 10,
     where: {
       type: {
@@ -77,7 +77,7 @@ const queryPageBySlug = cache(async (slug: string[]) => {
     },
   })
   const resultSwhz = await payload.find({
-    collection: 'pages',
+    collection: collection,
     limit: slug[1] === 'home' ? 4 : 10,
     where: {
       type: {
@@ -87,7 +87,7 @@ const queryPageBySlug = cache(async (slug: string[]) => {
   })
 
   const resultDetails = await payload.find({
-    collection: 'pages',
+    collection: collection,
     where: {
       slug: {
         equals: slug[2],
@@ -101,8 +101,7 @@ const queryPageBySlug = cache(async (slug: string[]) => {
   const footer = await payload.findGlobal({
     slug: 'footer',
   })
-  const dict = await getDictionary(slug&&slug.length>0?slug[0]:'zh'); // en
-
+  const dict = await getDictionary(slug && slug.length > 0 ? slug[0] : 'zh') // en
 
   return {
     resultZxdt: resultZxdt.docs || [],
@@ -114,8 +113,8 @@ const queryPageBySlug = cache(async (slug: string[]) => {
     imageList: header.images,
     address: footer.address,
     phone: footer.phone,
-    slug:slug,
-    detailContent:resultDetails.docs[0],
-    dict
+    slug: slug,
+    detailContent: resultDetails.docs[0],
+    dict,
   }
 })

@@ -1,3 +1,11 @@
+/*
+ * @Author: tang.haoming
+ * @Date: 2024-10-26 04:20:58
+ * @LastEditors: tang.haoming
+ * @LastEditTime: 2024-11-04 22:22:58
+ * @FilePath: /allen/src/components/BeforeDashboard/index.tsx
+ * @Description: 
+ */
 import { Banner } from '@payloadcms/ui/elements/Banner'
 import React from 'react'
 
@@ -10,63 +18,26 @@ const BeforeDashboard: React.FC = () => {
   return (
     <div className={baseClass}>
       <Banner className={`${baseClass}__banner`} type="success">
-        <h4>Welcome to your dashboard!</h4>
+        <h4>后台使用说明：</h4>
       </Banner>
-      Here&apos;s what to do next:
+
       <ul className={`${baseClass}__instructions`}>
+
         <li>
-          <SeedButton />
-          {' with a few pages, posts, and projects to jump-start your new site, then '}
-          <a href="/" target="_blank">
-            visit your website
-          </a>
-          {' to see the results.'}
+          {/* <SeedButton /> */}
+          <strong>  {'新闻上传按语言上传，图片上传一次就行了，上传了直接选就行了，就是内容要人工翻译一下贴上去就行了'}</strong>
         </li>
         <li>
-          If you created this repo using Payload Cloud, head over to GitHub and clone it to your
-          local machine. It will be under the <i>GitHub Scope</i> that you selected when creating
-          this project.
+        <strong>  轮播宣传图就是首页轮播的图片，最多6张。</strong>
         </li>
         <li>
-          {'Modify your '}
-          <a
-            href="https://payloadcms.com/docs/configuration/collections"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            collections
-          </a>
-          {' and add more '}
-          <a
-            href="https://payloadcms.com/docs/fields/overview"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            fields
-          </a>
-          {' as needed. If you are new to Payload, we also recommend you check out the '}
-          <a
-            href="https://payloadcms.com/docs/getting-started/what-is-payload"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Getting Started
-          </a>
-          {' docs.'}
+         <strong>  信息配置只有地址跟电话号码</strong>
         </li>
         <li>
-          Commit and push your changes to the repository to trigger a redeployment of your project.
+        <strong> 用户管理可以不用管，用第一次注册的帐号就行了</strong>
         </li>
       </ul>
-      {'Pro Tip: This block is a '}
-      <a
-        href="https://payloadcms.com/docs/admin/components#base-component-overrides"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        custom component
-      </a>
-      , you can remove it at any time by updating your <strong>payload.config</strong>.
+
     </div>
   )
 }
