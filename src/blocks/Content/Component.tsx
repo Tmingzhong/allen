@@ -1,12 +1,19 @@
+/*
+ * @Author: tang.haoming
+ * @Date: 2024-10-26 04:20:58
+ * @LastEditors: tang.haoming
+ * @LastEditTime: 2024-11-04 20:42:33
+ * @FilePath: /allen/src/blocks/Content/Component.tsx
+ * @Description: 
+ */
 import { cn } from 'src/utilities/cn'
 import React from 'react'
 import RichText from '@/components/RichText'
 
-import type { Page } from '@/payload-types'
 
 import { CMSLink } from '../../components/Link'
 
-type Props = Extract<Page['layout'][0], { blockType: 'content' }>
+type Props = any
 
 export const ContentBlock: React.FC<
   {

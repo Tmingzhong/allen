@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-26 21:55:14
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-01 23:46:45
+ * @LastEditTime: 2024-11-04 20:36:52
  * @FilePath: /allen/src/app/(frontend)/[...slug]/swiperCompnent.tsx
  * @Description:
  */
@@ -18,6 +18,7 @@ import { SoundOutlined } from '@ant-design/icons'
 // import required modules
 import { Autoplay, Pagination, Navigation } from 'swiper/modules'
 import arrowDwon from '../../../../public/arrow-dwon.png'
+import { IImage } from './page.client'
 export interface IStepProgress {
   imageList: Array<IImage>
   slug:string
@@ -42,7 +43,7 @@ const swiperCompnent = (props: IStepProgress) => {
         modules={[Autoplay, Navigation]}
         className="mySwiper"
       >
-        {imageList.map((item, index) => {
+        {imageList.map((item:any, index) => {
           return (
             <SwiperSlide key={item.id}>
               <Image

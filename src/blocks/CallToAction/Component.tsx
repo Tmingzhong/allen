@@ -1,11 +1,18 @@
+/*
+ * @Author: tang.haoming
+ * @Date: 2024-10-26 04:20:58
+ * @LastEditors: tang.haoming
+ * @LastEditTime: 2024-11-04 20:41:48
+ * @FilePath: /allen/src/blocks/CallToAction/Component.tsx
+ * @Description: 
+ */
 import React from 'react'
 
-import type { Page } from '@/payload-types'
 
 import RichText from '@/components/RichText'
 import { CMSLink } from '@/components/Link'
 
-type Props = Extract<Page['layout'][0], { blockType: 'cta' }>
+type Props = any
 
 export const CallToActionBlock: React.FC<
   Props & {

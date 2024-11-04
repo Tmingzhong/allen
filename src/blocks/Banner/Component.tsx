@@ -1,4 +1,11 @@
-import type { BannerBlock as BannerBlockProps } from 'src/payload-types'
+/*
+ * @Author: tang.haoming
+ * @Date: 2024-11-04 20:38:59
+ * @LastEditors: tang.haoming
+ * @LastEditTime: 2024-11-04 20:40:47
+ * @FilePath: /allen/src/blocks/Banner/Component.tsx
+ * @Description: 
+ */
 
 import { cn } from 'src/utilities/cn'
 import React from 'react'
@@ -6,7 +13,7 @@ import RichText from '@/components/RichText'
 
 type Props = {
   className?: string
-} & BannerBlockProps
+} & any
 
 export const BannerBlock: React.FC<Props> = ({ className, content, style }) => {
   return (

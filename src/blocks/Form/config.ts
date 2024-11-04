@@ -1,3 +1,11 @@
+/*
+ * @Author: tang.haoming
+ * @Date: 2024-10-26 04:20:58
+ * @LastEditors: tang.haoming
+ * @LastEditTime: 2024-11-04 20:43:06
+ * @FilePath: /allen/src/blocks/Form/config.ts
+ * @Description:
+ */
 import type { Block } from 'payload'
 
 import {
@@ -11,12 +19,6 @@ export const FormBlock: Block = {
   slug: 'formBlock',
   interfaceName: 'FormBlock',
   fields: [
-    {
-      name: 'form',
-      type: 'relationship',
-      relationTo: 'forms',
-      required: true,
-    },
     {
       name: 'enableIntro',
       type: 'checkbox',

@@ -5,7 +5,6 @@ import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import React, { Fragment, JSX } from 'react'
 import { CMSLink } from '@/components/Link'
 import { DefaultNodeTypes, SerializedBlockNode } from '@payloadcms/richtext-lexical'
-import type { BannerBlock as BannerBlockProps } from '@/payload-types'
 import Image from 'next/image'
 
 import {
@@ -17,14 +16,13 @@ import {
   IS_SUPERSCRIPT,
   IS_UNDERLINE,
 } from './nodeFormat'
-import type { Page } from '@/payload-types'
 
 export type NodeTypes =
   | DefaultNodeTypes
   | SerializedBlockNode<
-    | Extract<Page['layout'][0], { blockType: 'cta' }>
-    | Extract<Page['layout'][0], { blockType: 'mediaBlock' }>
-    | BannerBlockProps
+    | Extract<any, { blockType: 'cta' }>
+    | Extract<any, { blockType: 'mediaBlock' }>
+    | any
     | CodeBlockProps
   >
 

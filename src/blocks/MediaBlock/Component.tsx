@@ -1,14 +1,21 @@
+/*
+ * @Author: tang.haoming
+ * @Date: 2024-10-26 04:20:58
+ * @LastEditors: tang.haoming
+ * @LastEditTime: 2024-11-04 20:43:45
+ * @FilePath: /allen/src/blocks/MediaBlock/Component.tsx
+ * @Description: 
+ */
 import type { StaticImageData } from 'next/image'
 
 import { cn } from 'src/utilities/cn'
 import React from 'react'
 import RichText from '@/components/RichText'
 
-import type { Page } from '@/payload-types'
 
 import { Media } from '../../components/Media'
 
-type Props = Extract<Page['layout'][0], { blockType: 'mediaBlock' }> & {
+type Props = any & {
   breakout?: boolean
   captionClassName?: string
   className?: string

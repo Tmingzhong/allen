@@ -1,9 +1,17 @@
+/*
+ * @Author: tang.haoming
+ * @Date: 2024-10-26 04:20:58
+ * @LastEditors: tang.haoming
+ * @LastEditTime: 2024-11-04 20:46:57
+ * @FilePath: /allen/src/components/Link/index.tsx
+ * @Description: 
+ */
 import { Button, type ButtonProps } from '@/components/ui/button'
 import { cn } from 'src/utilities/cn'
 import Link from 'next/link'
 import React from 'react'
 
-import type { Page, Post } from '@/payload-types'
+import type { Page } from '@/payload-types'
 
 type CMSLinkType = {
   appearance?: 'inline' | ButtonProps['variant']
@@ -13,7 +21,7 @@ type CMSLinkType = {
   newTab?: boolean | null
   reference?: {
     relationTo: 'pages' | 'posts'
-    value: Page | Post | string | number
+    value: Page | any | string | number
   } | null
   size?: ButtonProps['size'] | null
   type?: 'custom' | 'reference' | null
