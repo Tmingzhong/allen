@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-27 16:41:51
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-03 19:30:54
+ * @LastEditTime: 2024-11-05 22:17:05
  * @FilePath: /allen/src/app/(frontend)/[...slug]/cardTable.tsx
  * @Description:
  */
@@ -26,6 +26,7 @@ const CardTable = (props: any) => {
       '/api/myRouter?' +
         new URLSearchParams({
           type: type,
+          lang:lang
         }),
     )
       .then((res) => res.json())

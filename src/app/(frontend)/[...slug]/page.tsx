@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-26 04:20:58
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-04 22:05:30
+ * @LastEditTime: 2024-11-05 22:26:19
  * @FilePath: /allen/src/app/(frontend)/[...slug]/page.tsx
  * @Description:
  */
@@ -42,7 +42,7 @@ const queryPageBySlug = cache(async (slug: string[]) => {
   })
   const resultYwgl = await payload.find({
     collection: collection,
-    limit: slug[1] === 'home' ? 4 : 10,
+    limit: slug[1] === 'home' ? 4 : 6,
     where: {
       type: {
         equals: 'ywgl',
@@ -51,7 +51,7 @@ const queryPageBySlug = cache(async (slug: string[]) => {
   })
   const resultJqgg = await payload.find({
     collection: collection,
-    limit: slug[1] === 'home' ? 4 : 10,
+    limit: slug[1] === 'home' ? 4 : 6,
     where: {
       type: {
         equals: 'jqgg',
@@ -60,7 +60,7 @@ const queryPageBySlug = cache(async (slug: string[]) => {
   })
   const resultJqzx = await payload.find({
     collection: collection,
-    limit: slug[1] === 'home' ? 4 : 10,
+    limit: slug[1] === 'home' ? 4 : 6,
     where: {
       type: {
         equals: 'jqzx',
@@ -69,7 +69,7 @@ const queryPageBySlug = cache(async (slug: string[]) => {
   })
   const resultJqhd = await payload.find({
     collection: collection,
-    limit: slug[1] === 'home' ? 4 : 10,
+    limit: slug[1] === 'home' ? 4 : 6,
     where: {
       type: {
         equals: 'jqhd',
@@ -78,7 +78,7 @@ const queryPageBySlug = cache(async (slug: string[]) => {
   })
   const resultSwhz = await payload.find({
     collection: collection,
-    limit: slug[1] === 'home' ? 4 : 10,
+    limit: slug[1] === 'home' ? 4 : 6,
     where: {
       type: {
         equals: 'swhz',

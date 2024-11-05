@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-15 22:05:32
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-03 21:11:10
+ * @LastEditTime: 2024-11-05 22:12:14
  * @FilePath: /allen/src/app/(frontend)/[...slug]/page.client.tsx
  * @Description:
  */
@@ -151,7 +151,7 @@ function Page(props: {
 
     {
       key: 'jqzx',
-      label: dict.jqgg,
+      label: dict.jqzx,
       children: <CardTable more={dict.more} lang={lang} isList={isList} page={pageData.resultJqzx} type={'jqzx'} />,
     },
     {
