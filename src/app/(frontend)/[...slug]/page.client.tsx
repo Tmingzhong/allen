@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-15 22:05:32
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-05 22:12:14
+ * @LastEditTime: 2024-11-05 22:49:21
  * @FilePath: /allen/src/app/(frontend)/[...slug]/page.client.tsx
  * @Description:
  */
@@ -198,11 +198,13 @@ function Page(props: {
           // className="w-full h-full object-contain"
         />
 
-        <div className="flex ">
+        <div className="flex flex-auto">
           <Menu
             onClick={onClick}
             style={{
-              justifyContent: 'center',
+              display:'flex',
+              flex: '1 1 auto',
+              justifyContent: 'end',
               backgroundColor: '#f7f7f7',
               alignItems: 'center',
               fontWeight: 'bold',
