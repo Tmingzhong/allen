@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-15 22:05:32
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-06 21:08:37
+ * @LastEditTime: 2024-11-07 23:26:24
  * @FilePath: /allen/src/app/(frontend)/[...slug]/page.client.tsx
  * @Description:
  */
@@ -252,7 +252,7 @@ function Page(props: {
 
       <Content className="flex flex-auto flex-col  bg-[#f7f7f7] w-full h-full ">
         {isHome ? (
-          <SwiperCompnent imageList={pageData.imageList} slug={pageData?.resultZxdt[0]?.slug} title={pageData?.resultZxdt[0]?.title}/>
+          <SwiperCompnent lang={lang} imageList={pageData.imageList} slug={pageData?.resultZxdt[0]?.slug} title={pageData?.resultZxdt[0]?.title}/>
         ) : (
           <Image
             className=" w-full h-[500px] object-cover	"

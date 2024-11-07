@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-26 21:55:14
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-04 20:36:52
+ * @LastEditTime: 2024-11-07 23:26:47
  * @FilePath: /allen/src/app/(frontend)/[...slug]/swiperCompnent.tsx
  * @Description:
  */
@@ -19,13 +19,17 @@ import { SoundOutlined } from '@ant-design/icons'
 import { Autoplay, Pagination, Navigation } from 'swiper/modules'
 import arrowDwon from '../../../../public/arrow-dwon.png'
 import { IImage } from './page.client'
+import { getDictionary } from '@/dictionaries';
+
 export interface IStepProgress {
   imageList: Array<IImage>
   slug:string
   title:string
+  lang:string
 }
-const swiperCompnent = (props: IStepProgress) => {
-  const { imageList,title='',slug } = props
+const swiperCompnent = async (props: IStepProgress) => {
+  const { imageList,title='',slug,lang='zh' } = props
+  const dict = await getDictionary(lang); // en
 
   return (
     <div className="homePage relative ">
@@ -69,7 +73,7 @@ const swiperCompnent = (props: IStepProgress) => {
               paddingRight: '8px',
             }}
           />
-          <a href={`/details/${slug}`} >{`最新动态：${title}`}</a>
+          <a href={`/details/${slug}`} >{`${dict.zxdt}:${title}`}</a>
         </div>
         {/* <SlideNextButton /> */}
       </div>

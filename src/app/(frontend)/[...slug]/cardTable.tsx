@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-27 16:41:51
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-05 22:17:05
+ * @LastEditTime: 2024-11-07 23:22:19
  * @FilePath: /allen/src/app/(frontend)/[...slug]/cardTable.tsx
  * @Description:
  */
@@ -99,8 +99,8 @@ const CardTable = (props: any) => {
             <div className="flex flex-row overflow-hidden bg-[#f7f7f7]">
               <img
                 className="imgStyle"
-                src={`${process.env.NEXT_PUBLIC_SERVER_URL}/${item.image.url}`}
-                alt={item.image.alt}
+                src={`${process.env.NEXT_PUBLIC_SERVER_URL}/${item.image?.url}`}
+                alt={item.image?.alt}
               />
               <div className="flex flex-col overflow-hidden ml-2 ">
                 <p className="font-bold truncate text-[#4B4A48]">{item.title}</p>
