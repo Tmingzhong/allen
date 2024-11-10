@@ -2,17 +2,12 @@
  * @Author: tang.haoming
  * @Date: 2024-10-26 04:20:58
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-10-28 23:40:45
+ * @LastEditTime: 2024-11-10 19:00:43
  * @FilePath: /allen/src/collections/Media.ts
  * @Description:
  */
 import type { CollectionConfig } from 'payload'
 
-import {
-  FixedToolbarFeature,
-  InlineToolbarFeature,
-  lexicalEditor,
-} from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
@@ -29,7 +24,10 @@ export const Media: CollectionConfig = {
     singular: '图片素材',
   },
   access: {
-    read: () => true,
+    create: anyone,
+    delete: anyone,
+    read: anyone,
+    update: anyone,
   },
 
   fields: [

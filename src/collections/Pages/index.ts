@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-24 10:07:05
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-09 16:54:50
+ * @LastEditTime: 2024-11-10 19:00:47
  * @FilePath: /allen/src/collections/Pages/index.ts
  * @Description:
  */
@@ -10,6 +10,8 @@ import type { CollectionConfig } from 'payload'
 
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
+import { authenticated } from '@/access/authenticated'
+import { anyone } from '@/access/anyone'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -18,7 +20,10 @@ export const Pages: CollectionConfig = {
     singular: '新闻上报',
   },
   access: {
-    read: () => true,
+    create: anyone,
+    delete: anyone,
+    read: anyone,
+    update: anyone,
   },
 
   admin: {
