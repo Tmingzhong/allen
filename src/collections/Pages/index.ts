@@ -2,16 +2,45 @@
  * @Author: tang.haoming
  * @Date: 2024-10-24 10:07:05
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-10 19:00:47
+ * @LastEditTime: 2024-11-11 00:03:45
  * @FilePath: /allen/src/collections/Pages/index.ts
  * @Description:
  */
 import type { CollectionConfig } from 'payload'
 
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import {
+  BlocksFeature,
+  BoldFeature,
+  FixedToolbarFeature,
+  HeadingFeature,
+  InlineToolbarFeature,
+  ItalicFeature,
+  lexicalEditor,
+  LinkFeature,
+  UnderlineFeature,
+} from '@payloadcms/richtext-lexical'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { authenticated } from '@/access/authenticated'
 import { anyone } from '@/access/anyone'
+
+import type { Block } from 'payload'
+import { Banner } from '@/blocks/Banner/config'
+
+export const ImageUrl: Block = {
+  slug: 'imageUrl',
+  labels: {
+    plural: '图片路径上传',
+    singular: '图片路径上传',
+  },
+  fields: [
+    {
+      name: 'url',
+      label: '图片云盘路径',
+      type: 'text',
+      required: true,
+    },
+  ],
+}
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -85,15 +114,23 @@ export const Pages: CollectionConfig = {
     },
     {
       name: 'image',
-      type: 'upload',
-      relationTo: 'media',
+      type: 'text',
       required: true,
-      label: '新闻首页展示图',
+      label: '新闻首页展示图地址',
     },
     {
       name: 'content',
       type: 'richText',
-      editor: lexicalEditor(),
+      editor: lexicalEditor({
+        features: ({ rootFeatures }) => {
+          return [
+            ...rootFeatures,
+            HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+            FixedToolbarFeature(),
+            InlineToolbarFeature(),
+          ]
+        },
+      }),
       label: '新闻内容',
       required: true,
     },

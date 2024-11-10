@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-24 10:07:05
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-10 19:41:42
+ * @LastEditTime: 2024-11-10 23:31:13
  * @FilePath: /allen/src/Header/config.ts
  * @Description:
  */
@@ -23,11 +23,10 @@ export const Header: GlobalConfig = {
       type: 'array',
       fields: [
         {
-          name: 'image',
-          type: 'upload',
-          relationTo: 'media',
+          name: 'imageUrl',
+          type: 'text',
           required: true,
-          label: '图片',
+          label: '图片路径',
         },
       ],
       maxRows: 6,

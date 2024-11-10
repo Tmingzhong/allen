@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-26 04:20:58
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-10 18:06:02
+ * @LastEditTime: 2024-11-11 00:05:18
  * @FilePath: /allen/src/payload.config.ts
  * @Description:
  */
@@ -10,6 +10,7 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
 
 import {
+  BlocksFeature,
   BoldFeature,
   ItalicFeature,
   LinkFeature,
@@ -21,8 +22,7 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 
-import { Media } from './collections/Media'
-import { Pages } from './collections/Pages'
+import { ImageUrl, Pages } from './collections/Pages'
 
 import Users from './collections/Users'
 
@@ -53,29 +53,8 @@ export default buildConfig({
   editor: lexicalEditor({
     features: () => {
       return [
-        UnderlineFeature(),
-        BoldFeature(),
-        ItalicFeature(),
-        LinkFeature({
-          fields: ({ defaultFields }) => {
-            const defaultFieldsWithoutUrl = defaultFields.filter((field) => {
-              if ('name' in field && field.name === 'url') return false
-              return true
-            })
-
-            return [
-              ...defaultFieldsWithoutUrl,
-              {
-                name: 'url',
-                type: 'text',
-                admin: {
-                  condition: ({ linkType }) => linkType !== 'internal',
-                },
-                label: ({ t }) => t('fields:enterURL'),
-                required: true,
-              },
-            ]
-          },
+        BlocksFeature({
+          blocks: [ImageUrl],
         }),
       ]
     },
@@ -531,7 +510,7 @@ export default buildConfig({
     },
   },
 
-  collections: [Pages, Media, Users],
+  collections: [Pages, Users],
   cors: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),
   csrf: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),
   globals: [Header, Footer],

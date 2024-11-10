@@ -11,6 +11,7 @@ import {
   IS_BOLD,
   IS_CODE,
   IS_ITALIC,
+  IS_NORMAL,
   IS_STRIKETHROUGH,
   IS_SUBSCRIPT,
   IS_SUPERSCRIPT,
@@ -20,11 +21,11 @@ import {
 export type NodeTypes =
   | DefaultNodeTypes
   | SerializedBlockNode<
-    | Extract<any, { blockType: 'cta' }>
-    | Extract<any, { blockType: 'mediaBlock' }>
-    | any
-    | CodeBlockProps
-  >
+      | Extract<any, { blockType: 'cta' }>
+      | Extract<any, { blockType: 'mediaBlock' }>
+      | any
+      | CodeBlockProps
+    >
 
 type Props = {
   nodes: NodeTypes[]
@@ -70,6 +71,7 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
             text = <sup key={index}>{text}</sup>
           }
 
+
           return text
         }
 
@@ -103,6 +105,7 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
           if (!block || !blockType) {
             return null
           }
+          console.log(block)
 
           switch (blockType) {
             case 'cta':
@@ -123,6 +126,17 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
               return <BannerBlock className="col-start-2 mb-4" key={index} {...block} />
             case 'code':
               return <CodeBlock className="col-start-2" key={index} {...block} />
+            case 'imageUrl':
+              return (
+                <img
+                  src={`${block.url}`}
+                  alt="Picture of the author"
+                // width={500} automatically provided
+                // height={500} automatically provided
+                // blurDataURL="data:..." automatically provided
+                // placeholder="blur" // Optional blur-up while loading
+                />
+              )
             default:
               return null
           }
@@ -141,7 +155,7 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
             case 'heading': {
               const Tag = node?.tag
               return (
-                <Tag className="col-start-2" key={index}>
+                <Tag className="col-start-2 break-words text-black" key={index}>
                   {serializedChildren}
                 </Tag>
               )
@@ -199,26 +213,6 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
                 </CMSLink>
               )
             }
-            case 'upload': {
-              console.log('1231231313123123')
-
-              const value = node.value as any
-              console.log(value)
-
-              return (
-                <Image
-                  src={`${process.env.NEXT_PUBLIC_SERVER_URL}/${value.url}`}
-                  alt="Picture of the author"
-                  width={value.width}
-                  height={value.height}
-                // width={500} automatically provided
-                // height={500} automatically provided
-                // blurDataURL="data:..." automatically provided
-                // placeholder="blur" // Optional blur-up while loading
-                />
-              )
-            }
-
 
             default:
               return null

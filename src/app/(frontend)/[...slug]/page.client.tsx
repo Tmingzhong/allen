@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-15 22:05:32
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-10 18:01:05
+ * @LastEditTime: 2024-11-11 00:26:57
  * @FilePath: /allen/src/app/(frontend)/[...slug]/page.client.tsx
  * @Description:
  */

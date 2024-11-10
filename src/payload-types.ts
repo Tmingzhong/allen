@@ -12,7 +12,6 @@ export interface Config {
   };
   collections: {
     pages: Page;
-    media: Media;
     users: User;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -57,7 +56,7 @@ export interface Page {
   title: string;
   subTitle: string;
   type: 'ywgl' | 'jqzx' | 'jqhd' | 'jqgg' | 'swhz';
-  image: number | Media;
+  image: string;
   content: {
     root: {
       type: string;
@@ -80,25 +79,6 @@ export interface Page {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: number;
-  alt?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -128,10 +108,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'pages';
         value: number | Page;
-      } | null)
-    | ({
-        relationTo: 'media';
-        value: number | Media;
       } | null)
     | ({
         relationTo: 'users';
@@ -187,7 +163,7 @@ export interface Header {
   id: number;
   images?:
     | {
-        image: number | Media;
+        imageUrl: string;
         id?: string | null;
       }[]
     | null;
