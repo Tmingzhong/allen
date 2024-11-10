@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-26 21:55:14
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-07 23:26:47
+ * @LastEditTime: 2024-11-10 11:19:12
  * @FilePath: /allen/src/app/(frontend)/[...slug]/swiperCompnent.tsx
  * @Description:
  */
@@ -25,11 +25,11 @@ export interface IStepProgress {
   imageList: Array<IImage>
   slug:string
   title:string
-  lang:string
+  dict:any
 }
-const swiperCompnent = async (props: IStepProgress) => {
-  const { imageList,title='',slug,lang='zh' } = props
-  const dict = await getDictionary(lang); // en
+const swiperCompnent =  (props: IStepProgress) => {
+  const { imageList = [],title='',slug,dict } = props
+
 
   return (
     <div className="homePage relative ">
@@ -47,14 +47,14 @@ const swiperCompnent = async (props: IStepProgress) => {
         modules={[Autoplay, Navigation]}
         className="mySwiper"
       >
-        {imageList.map((item:any, index) => {
+        {imageList&&imageList.map((item:any, index) => {
           return (
             <SwiperSlide key={item.id}>
               <Image
                 className="swiperImage"
                 fill={true}
                 alt={item.alt}
-                src={`${process.env.NEXT_PUBLIC_SERVER_URL}/${item.image.url}`}
+                src={`${process.env.NEXT_PUBLIC_SERVER_URL}/${item.image?.url}`}
               />
             </SwiperSlide>
           )

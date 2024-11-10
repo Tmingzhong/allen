@@ -14,5 +14,9 @@
   "source": "文章来源",
   "author": "作者",
   "pubdate": "发布时间",
-  "summary": "文章摘要"
+  "summary": "文章摘要",
+  "unkown": "未知",
+  "null": "未知",
+
+  "address": "地址"
 }

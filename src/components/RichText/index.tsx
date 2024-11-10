@@ -1,3 +1,11 @@
+/*
+ * @Author: tang.haoming
+ * @Date: 2024-10-26 04:20:58
+ * @LastEditors: tang.haoming
+ * @LastEditTime: 2024-11-09 23:53:34
+ * @FilePath: /allen/src/components/RichText/index.tsx
+ * @Description: 
+ */
 import { cn } from '@/utilities/cn'
 import React from 'react'
 
@@ -32,10 +40,9 @@ const RichText: React.FC<Props> = ({
       )}
     >
       {content &&
-        !Array.isArray(content) &&
-        typeof content === 'object' &&
-        'root' in content &&
-        serializeLexical({ nodes: content?.root?.children })}
+        Array.isArray(content) &&
+
+        serializeLexical({ nodes: content })}
     </div>
   )
 }

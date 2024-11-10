@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-26 04:20:58
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-07 22:04:28
+ * @LastEditTime: 2024-11-10 16:38:58
  * @FilePath: /allen/src/payload.config.ts
  * @Description:
  */
@@ -28,8 +28,7 @@ import Users from './collections/Users'
 
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
-import { EnPages } from './collections/EnPages'
-import { KoPages } from './collections/KoPages'
+import { migrations } from './migrations'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -82,6 +81,7 @@ export default buildConfig({
     },
   }),
   db: postgresAdapter({
+    prodMigrations: migrations,
     pool: {
       connectionString: process.env.DATABASE_URI || '',
     },
@@ -531,7 +531,7 @@ export default buildConfig({
     },
   },
 
-  collections: [Pages, Media, Users, KoPages, EnPages],
+  collections: [Pages, Media, Users],
   cors: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),
   csrf: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),
   globals: [Header, Footer],

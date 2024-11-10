@@ -2,15 +2,15 @@
  * @Author: tang.haoming
  * @Date: 2024-10-15 22:05:32
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-07 23:26:24
+ * @LastEditTime: 2024-11-10 15:42:32
  * @FilePath: /allen/src/app/(frontend)/[...slug]/page.client.tsx
  * @Description:
  */
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import SwiperCompnent from './swiperCompnent'
-import { Breadcrumb, Layout, Menu, theme, Select, Button } from 'antd'
+import { Layout, Menu, Select, Button } from 'antd'
 import { Tabs } from 'antd'
 import type { TabsProps } from 'antd'
 import Image from 'next/image'
@@ -22,6 +22,12 @@ const { Header, Content, Footer } = Layout
 import '../globals.css'
 import CardTable from './cardTable'
 import RichText from '@/components/RichText'
+import { useTheme } from '@payloadcms/ui'
+import useSWR from 'swr'
+import fetcher from './fetcher'
+import MD5 from '@/utilities/md5'
+import { ThemeContext } from '@/providers/Theme'
+import processData from './transferData'
 
 export interface IImage {
   url: string
@@ -39,7 +45,7 @@ interface IPage {
   createdAt: string
   _status: string
 }
-function Page(props: {
+ function Page(props: {
   pageData: {
     // page: IPage
     resultZxdt: IPage[]
@@ -50,130 +56,290 @@ function Page(props: {
     resultSwhz: IPage
     imageList: Array<IImage>
     address?: string
+    title?: string
+    subTitle?: string
+    source?: string
+    authar?: string
     phone?: string
     slug: string[]
-    detailContent: any,
+    detailContent?: any
+    content: any
     dict
   }
 }) {
-
-  
   const { pageData } = props
 
-  const {dict} = pageData
+  const { dict, detailContent } = pageData
+  const { setLoading } = useContext(ThemeContext)
 
+  console.log('渲染了 几次----------')
   console.log(pageData)
-  console.log('detailData------>', pageData.detailContent)
   const isDetails = pageData.slug[1] === 'details'
   const isList = pageData.slug[1] === 'list'
   const isHome = pageData.slug[1] === 'home'
   const lang = pageData.slug[0]
-  console.log(isDetails,isList,isHome)
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [current, setCurrent] = useState('home')
   const [activeKey, setActiveKey] = useState('zxdt')
   const [langValue, setLangValue] = useState(lang)
+  const [content, setContent] = useState(pageData?.content)
 
-  
+  const [translateData, setTranslateData] = useState({
+    address: pageData?.address,
+    title: pageData?.detailContent?.title,
+    subTitle: pageData?.detailContent?.subTitle,
+    source: pageData?.detailContent?.source,
+    authar: pageData?.detailContent?.authar,
+  })
 
-  
-  const router = useRouter()
+  const detailsAddress = `${pageData?.address}//${detailContent?.title}//${detailContent?.subTitle}//${detailContent?.source}//${detailContent?.authar}`
+
+  const text = isDetails ? detailsAddress : `${pageData?.address}`
+
+  const { data, error, isLoading } = useSWR(
+    langValue != 'zh'
+      ? `/api/translate?` +
+          new URLSearchParams({
+            text: text,
+            to: lang === 'ko' ? 'kor' : lang,
+          })
+      : null,
+    fetcher,
+  )
   useEffect(()=>{
-    if(pageData.slug[1] === 'list'&&!pageData.slug[2]){
+    if(lang !='zh'&&pageData?.content){
+      setLoading(true)
+      const copyContent = JSON.parse(JSON.stringify(pageData.content))
+      processData(copyContent,lang).then((data)=>{
+        if(data){
+          setLoading(false)
+          setContent(data)
+        }
+      })
+    }
+  },[])
+
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    if (isLoading) {
+      setLoading(true)
+    } else {
+      setLoading(false)
+    }
+    if(data){
+      if(!isDetails){
+        console.log('123123123123123123123123')
+        console.log(data)
+        setTranslateData({
+          address: data?.trans_result[0]?.dst,
+          title: '',
+          subTitle:  '',
+          source:  '',
+          authar:  '',
+        })
+      }else{
+        console.log('6666656567575467')
+        console.log(data)
+        const array = data?.trans_result[0].dst.split('//')
+        console.log(array)
+        console.log(array[0])
+
+        setTranslateData({
+          address: array[0],
+          title: array[1] ? array[1] : '',
+          subTitle: array[2] ? array[2] : '',
+          source: array[3] ? array[3] : '',
+          authar: array[4] ? array[4] : '',
+        })
+      }
+
+    }
+
+  }, [data, isLoading, setLoading])
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+
+  const router = useRouter()
+  useEffect(() => {
+    if (pageData.slug[1] === 'list' && !pageData.slug[2]) {
       setActiveKey('jqzx')
       setCurrent('jqzx')
     }
 
-    if(pageData.slug[1] === 'list'&&pageData.slug[2]){
+    if (pageData.slug[1] === 'list' && pageData.slug[2]) {
       setCurrent(pageData.slug[2])
       setActiveKey(pageData.slug[2])
     }
-    if(pageData.slug[1] === 'details'){
+    if (pageData.slug[1] === 'details') {
       setCurrent(pageData.detailContent.type)
     }
-  },[pageData?.detailContent?.type, pageData.slug])
+  }, [pageData?.detailContent?.type, pageData.slug])
 
   const onClick = (e) => {
-   
     console.log('click ', e)
     setCurrent(e.key)
-    if(e.key==='home'){
-      router.push(`/`)
-
-    }else{
+    if (e.key === 'home') {
+      router.push(`/${lang}`)
+    } else {
       router.push(`/${lang}/list/${e.key}`)
-
     }
   }
   // 改语言
   const handleChange = (value: string) => {
-    setLangValue(value)
-    router.push(`/${value}`)
+    // setLangValue(value)
+    // router.push(`/${value}`)
+    window.open(`http://localhost:3000/${value}/home`, '_blank')
   }
-  const onChange = (key: string) => {
-    setActiveKey(key)
-  }
+
   const tabItems: TabsProps['items'] = [
     {
       key: 'zxdt',
       label: dict.zxdt,
-      children: <CardTable more={dict.more} lang={lang} isList={isList} page={pageData.resultZxdt} type={'zxdt'} />,
+      children: (
+        <CardTable
+          more={dict.more}
+          lang={lang}
+          isList={isList}
+          page={pageData.resultZxdt}
+          type={'zxdt'}
+        />
+      ),
     },
     {
       key: 'jqzx',
       label: dict.jqzx,
-      children: <CardTable more={dict.more} lang={lang} isList={isList} page={pageData.resultJqzx} type={'jqzx'} />,
+      children: (
+        <CardTable
+          more={dict.more}
+          lang={lang}
+          isList={isList}
+          page={pageData.resultJqzx}
+          type={'jqzx'}
+        />
+      ),
     },
     {
       key: 'ywgl',
       label: dict.ywgl,
-      children: <CardTable more={dict.more} lang={lang} isList={isList} page={pageData.resultYwgl} type={'ywgl'} />,
+      children: (
+        <CardTable
+          more={dict.more}
+          lang={lang}
+          isList={isList}
+          page={pageData.resultYwgl}
+          type={'ywgl'}
+        />
+      ),
     },
     {
       key: 'jqgg',
       label: dict.jqgg,
-      children: <CardTable more={dict.more} lang={lang} isList={isList} page={pageData.resultJqgg} type={'jqgg'} />,
+      children: (
+        <CardTable
+          more={dict.more}
+          lang={lang}
+          isList={isList}
+          page={pageData.resultJqgg}
+          type={'jqgg'}
+        />
+      ),
     },
 
     {
       key: 'jqhd',
       label: dict.jqgg,
-      children: <CardTable more={dict.more} lang={lang} isList={isList} page={pageData.resultJqhd} type={'jqhd'} />,
+      children: (
+        <CardTable
+          more={dict.more}
+          lang={lang}
+          isList={isList}
+          page={pageData.resultJqhd}
+          type={'jqhd'}
+        />
+      ),
     },
     {
       key: 'swhz',
       label: dict.jqgg,
-      children: <CardTable more={dict.more} lang={lang} isList={isList} page={pageData.resultSwhz} type={'swhz'} />,
+      children: (
+        <CardTable
+          more={dict.more}
+          lang={lang}
+          isList={isList}
+          page={pageData.resultSwhz}
+          type={'swhz'}
+        />
+      ),
     },
   ]
   const tabItems2: TabsProps['items'] = [
-
     {
       key: 'jqzx',
       label: dict.jqzx,
-      children: <CardTable more={dict.more} lang={lang} isList={isList} page={pageData.resultJqzx} type={'jqzx'} />,
+      children: (
+        <CardTable
+          more={dict.more}
+          lang={lang}
+          isList={isList}
+          page={pageData.resultJqzx}
+          type={'jqzx'}
+        />
+      ),
     },
     {
       key: 'ywgl',
       label: dict.ywgl,
-      children: <CardTable more={dict.more} lang={lang} isList={isList} page={pageData.resultYwgl} type={'ywgl'} />,
+      children: (
+        <CardTable
+          more={dict.more}
+          lang={lang}
+          isList={isList}
+          page={pageData.resultYwgl}
+          type={'ywgl'}
+        />
+      ),
     },
     {
       key: 'jqgg',
-      label:dict.jqgg,
-      children: <CardTable more={dict.more} lang={lang} isList={isList} page={pageData.resultJqgg} type={'jqgg'} />,
+      label: dict.jqgg,
+      children: (
+        <CardTable
+          more={dict.more}
+          lang={lang}
+          isList={isList}
+          page={pageData.resultJqgg}
+          type={'jqgg'}
+        />
+      ),
     },
 
     {
       key: 'jqhd',
       label: dict.jqhd,
-      children: <CardTable more={dict.more} lang={lang} isList={isList} page={pageData.resultJqhd} type={'jqhd'} />,
+      children: (
+        <CardTable
+          more={dict.more}
+          lang={lang}
+          isList={isList}
+          page={pageData.resultJqhd}
+          type={'jqhd'}
+        />
+      ),
     },
     {
       key: 'swhz',
       label: dict.swhz,
-      children: <CardTable more={dict.more} lang={lang} isList={isList} page={pageData.resultSwhz} type={'swhz'} />,
+      children: (
+        <CardTable
+          more={dict.more}
+          lang={lang}
+          isList={isList}
+          page={pageData.resultSwhz}
+          type={'swhz'}
+        />
+      ),
     },
   ]
   return (
@@ -202,7 +368,7 @@ function Page(props: {
           <Menu
             onClick={onClick}
             style={{
-              display:'flex',
+              display: 'flex',
               flex: '1 1 auto',
               justifyContent: 'end',
               backgroundColor: '#f7f7f7',
@@ -223,9 +389,9 @@ function Page(props: {
                 label: dict.jqzx,
                 key: 'jqzx',
                 children: [
-                  { label:  dict.jqzx, key: 'jqzx' },
-                  { label:  dict.jqhd, key: 'jqhd' },
-                  { label:  dict.ywgl, key: 'ywgl' },
+                  { label: dict.jqzx, key: 'jqzx' },
+                  { label: dict.jqhd, key: 'jqhd' },
+                  { label: dict.ywgl, key: 'ywgl' },
                   { label: dict.jqgg, key: 'jqgg' },
                 ],
               },
@@ -252,7 +418,12 @@ function Page(props: {
 
       <Content className="flex flex-auto flex-col  bg-[#f7f7f7] w-full h-full ">
         {isHome ? (
-          <SwiperCompnent lang={lang} imageList={pageData.imageList} slug={pageData?.resultZxdt[0]?.slug} title={pageData?.resultZxdt[0]?.title}/>
+          <SwiperCompnent
+            dict={dict}
+            imageList={pageData?.imageList}
+            slug={pageData?.resultZxdt[0]?.slug}
+            title={pageData?.resultZxdt[0]?.title}
+          />
         ) : (
           <Image
             className=" w-full h-[500px] object-cover	"
@@ -265,40 +436,50 @@ function Page(props: {
           <div className=" mx-[12%] px-[8%] pb-[50px] my-10 p-4 bg-white min-w-96">
             <div className="flex flex-col ">
               <p className="pt-[50px]  pb-[20px] text-center text-[24px] font-bold">
-                {pageData.detailContent.title}
+                {translateData.title}
               </p>
               <div className="flex justify-around text-[#555555]">
-                <p>{`${dict.source}：${pageData.detailContent.source ? pageData.detailContent.source : '未知'}`}</p>
-                <p>{`${dict.author}：${pageData.detailContent.authar ? pageData.detailContent.authar : '未知'}`}</p>
-                <p>{`${dict.pubdate}：${pageData.detailContent.publishedAt ? pageData.detailContent.publishedAt.slice(0, 10) : '未知'}`}</p>
+                <p>{`${dict.source}：${translateData.source&&translateData.source!='null' ? translateData.source : dict.unkown}`}</p>
+                <p>{`${dict.author}：${translateData.authar&&translateData.authar!='null' ? translateData.authar : dict.unkown}`}</p>
+                <p>{`${dict.pubdate}：${pageData.detailContent.publishedAt ? pageData.detailContent.publishedAt.slice(0, 10) : dict.unkown}`}</p>
               </div>
               <div className="mt-8 mx-4 bg-red-100 p-4 text-start text-[#555555]">
-                {`${dict.summary}：${pageData.detailContent.subTitle}`}
+                {`${dict.summary}：${translateData.subTitle}`}
               </div>
             </div>
             <RichText
               className="mt-[50px] px-[8%] text-[#555555]"
-              content={pageData.detailContent.content}
+              content={content}
               enableGutter={false}
             />
           </div>
         ) : (
           <div className=" mx-40 my-10 p-4 bg-white min-w-96">
             <Tabs
-              activeKey={activeKey}
-              tabBarExtraContent={!isList? <Button onClick={() => router.push(`/${lang}/list`)}>{`${dict.more}`}</Button>:null}
-              items={isList?tabItems2:tabItems}
-              onChange={onChange}
+              defaultActiveKey={activeKey}
+              tabBarExtraContent={
+                !isList ? (
+                  <Button onClick={() => router.push(`/${lang}/list`)}>{`${dict.more}`}</Button>
+                ) : null
+              }
+              items={isList ? tabItems2 : tabItems}
             />
           </div>
         )}
       </Content>
       <Footer style={{ textAlign: 'center', backgroundColor: 'black', color: '#999' }}>
-        <span> {`${dict.address}：${pageData.address}`}</span>
-        <span  className='ml-8'> {`${dict.phone}：${pageData.phone}`}</span>
+        <span> {`${dict.address}：${translateData.address}`}</span>
+        <span className="ml-8"> {`${dict.phone}：${pageData.phone}`}</span>
       </Footer>
     </Layout>
   )
 }
 
-export default Page
+export default React.memo(Page, areEqual)
+function areEqual(prevProps, nextProps) {
+  if (prevProps.pageData === nextProps.pageData) {
+    return true
+  } else {
+    return false
+  }
+}

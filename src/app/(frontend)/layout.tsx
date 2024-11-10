@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-26 04:20:58
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-03 17:48:06
+ * @LastEditTime: 2024-11-10 11:14:25
  * @FilePath: /allen/src/app/(frontend)/layout.tsx
  * @Description:
  */
@@ -17,7 +17,7 @@ import { Providers } from '@/providers'
 import { AntdRegistry } from '@ant-design/nextjs-registry'
 
 import './globals.css'
-export async function generateMetadata({ params }) {
+export  function generateMetadata({ params }) {
 
   return {
     title: '矮寨大桥',
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
+export default  function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html className={cn(GeistSans.variable, GeistMono.variable)} lang="en" suppressHydrationWarning>
       <head>

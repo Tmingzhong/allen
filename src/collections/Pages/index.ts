@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-24 10:07:05
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-03 20:58:17
+ * @LastEditTime: 2024-11-09 16:54:50
  * @FilePath: /allen/src/collections/Pages/index.ts
  * @Description:
  */
@@ -14,8 +14,8 @@ import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 export const Pages: CollectionConfig = {
   slug: 'pages',
   labels: {
-    plural: '中文新闻上报',
-    singular: '中文新闻上报',
+    plural: '新闻上报',
+    singular: '新闻上报',
   },
   access: {
     read: () => true,

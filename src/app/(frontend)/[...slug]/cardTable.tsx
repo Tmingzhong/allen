@@ -1,8 +1,9 @@
+/* eslint-disable @next/next/no-img-element */
 /*
  * @Author: tang.haoming
  * @Date: 2024-10-27 16:41:51
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-07 23:22:19
+ * @LastEditTime: 2024-11-10 15:41:42
  * @FilePath: /allen/src/app/(frontend)/[...slug]/cardTable.tsx
  * @Description:
  */
@@ -59,36 +60,6 @@ const CardTable = (props: any) => {
     ) : null
   return (
     <div className="flex felx-row flex-wrap gap-[10px] ">
-      {/* <List
-        className="item"
-        loading={initLoading}
-        itemLayout="vertical"
-        loadMore={loadMore}
-        dataSource={page}
-        renderItem={(item: any) => (
-          <div key={item.id} className="item  ">
-            <Card hoverable className=" w-full h-[220px] ">
-              <div className="flex flex-row overflow-hidden bg-[#f7f7f7]">
-                <img
-                  className="imgStyle"
-                  src={`${process.env.NEXT_PUBLIC_SERVER_URL}/${item.image.url}`}
-                  alt={item.image.alt}
-                />
-                <div className="flex flex-col overflow-hidden ml-2 ">
-                  <p className="font-bold truncate text-[#4B4A48]">{item.title}</p>
-                  <p className="mb-4 pb-4 text-[14px] border-b border-[#C6C6C6] text-[#7D7D7D]">
-                    {item.createdAt ? item.createdAt.slice(0, 10) : ''}
-                  </p>
-                  <p className="line-clamp-3 text-[#7D7D7D] text-[14px]	  whitespace-normal text-ellipsis overflow-hidden   ">
-                    {item.subTitle}
-                  </p>
-                </div>
-              </div>
-            </Card>
-          </div>
-        )}
-      /> */}
-
       {list.map((item) => (
         <div key={item.id} className="item  ">
           <Card
@@ -97,11 +68,11 @@ const CardTable = (props: any) => {
             className=" w-full h-[220px] "
           >
             <div className="flex flex-row overflow-hidden bg-[#f7f7f7]">
-              <img
+              {item?.image?.url?<img
                 className="imgStyle"
-                src={`${process.env.NEXT_PUBLIC_SERVER_URL}/${item.image?.url}`}
+                src={`${process.env.NEXT_PUBLIC_SERVER_URL}/${item?.image?.url}`}
                 alt={item.image?.alt}
-              />
+              />:null}
               <div className="flex flex-col overflow-hidden ml-2 ">
                 <p className="font-bold truncate text-[#4B4A48]">{item.title}</p>
                 <p className="mb-4 pb-4 text-[14px] border-b border-[#C6C6C6] text-[#7D7D7D]">

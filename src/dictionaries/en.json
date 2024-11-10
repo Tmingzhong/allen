@@ -14,5 +14,9 @@
   "source": "source",
   "author": "author",
   "pubdate": "pubdate",
-  "summary": "summary"
+  "summary": "summary",
+  "unkown": "unkown",
+  "null": "unkown",
+
+  "address": "address"
 }
