@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-26 04:20:58
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-10 16:29:13
+ * @LastEditTime: 2024-11-10 16:53:55
  * @FilePath: /allen/src/app/(frontend)/[...slug]/page.tsx
  * @Description:
  */
@@ -159,7 +159,7 @@ async function translateText(text: string, lang) {
     salt: salt,
     sign: MD5(a),
   }
-  const b = await fetch('http://localhost:3000/api/myRouter', {
+  const b = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/myRouter`, {
     method: 'POST',
     body: JSON.stringify({ body }),
   })
