@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-24 10:07:05
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-10-26 15:53:43
+ * @LastEditTime: 2024-11-10 19:41:42
  * @FilePath: /allen/src/Header/config.ts
  * @Description:
  */
@@ -13,6 +13,9 @@ export const Header: GlobalConfig = {
   label: '宣传轮播图',
   access: {
     read: () => true,
+    readDrafts: () => true,
+    readVersions: () => true,
+    update: () => true,
   },
   fields: [
     {
