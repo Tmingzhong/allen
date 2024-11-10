@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-26 04:20:58
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-10 16:53:55
+ * @LastEditTime: 2024-11-10 18:02:29
  * @FilePath: /allen/src/app/(frontend)/[...slug]/page.tsx
  * @Description:
  */
@@ -14,7 +14,7 @@ import React, { cache } from 'react'
 
 import PageClient from './page.client'
 import { getDictionary } from '@/dictionaries'
-import MD5 from '@/utilities/md5'
+import translateListData from '@/utilities/translateListData'
 
 type Args = {
   params: Promise<{
@@ -106,12 +106,12 @@ const queryPageBySlug = cache(async (slug: string[]) => {
   const dict = await getDictionary(slug && slug.length > 0 ? slug[0] : 'zh') // en
 
   if (slug[1] != 'details') {
-    const zxdt = await processData(resultZxdt.docs, slug[0])
-    const ywgl = await processData(resultYwgl.docs, slug[0])
-    const jqgg = await processData(resultJqgg.docs, slug[0])
-    const jqzx = await processData(resultJqzx.docs, slug[0])
-    const jqhd = await processData(resultJqhd.docs, slug[0])
-    const swhz = await processData(resultSwhz.docs, slug[0])
+    const zxdt = await translateListData(resultZxdt.docs, slug[0])
+    const ywgl = await translateListData(resultYwgl.docs, slug[0])
+    const jqgg = await translateListData(resultJqgg.docs, slug[0])
+    const jqzx = await translateListData(resultJqzx.docs, slug[0])
+    const jqhd = await translateListData(resultJqhd.docs, slug[0])
+    const swhz = await translateListData(resultSwhz.docs, slug[0])
     return {
       resultZxdt: zxdt || [],
       resultYwgl: ywgl || [],
@@ -145,44 +145,3 @@ const queryPageBySlug = cache(async (slug: string[]) => {
     }
   }
 })
-async function translateText(text: string, lang) {
-  // 模拟翻译结果，实际应用中需要调用百度翻译 API 获取真实翻译结果
-  const salt = new Date().getTime()
-  const appid = '20241107002197187'
-  const key = 'HZZUBYlyhISVuJwsoCbP'
-  const a = appid + text + salt + key
-  const body = {
-    q: text,
-    from: 'auto',
-    to: lang === 'ko' ? 'kor' : lang,
-    appid: appid,
-    salt: salt,
-    sign: MD5(a),
-  }
-  const b = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/myRouter`, {
-    method: 'POST',
-    body: JSON.stringify({ body }),
-  })
-  const res = await b.json()
-  if (res?.trans_result) {
-    console.log('666666666')
-    console.log(res?.trans_result[0].dst)
-    const data = res?.trans_result[0].dst
-    return data
-  } else {
-    return text
-  }
-}
-async function processData(arr, lang) {
-  if (arr && lang != 'zh') {
-    for (let item of arr) {
-      if (item.title) {
-        item.title = await translateText(item.title, lang)
-      }
-      if (item.subTitle) {
-        item.subTitle = await translateText(item.title, lang)
-      }
-    }
-  }
-  return arr
-}

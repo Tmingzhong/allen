@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-15 22:05:32
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-10 15:42:32
+ * @LastEditTime: 2024-11-10 18:01:05
  * @FilePath: /allen/src/app/(frontend)/[...slug]/page.client.tsx
  * @Description:
  */
@@ -24,10 +24,10 @@ import CardTable from './cardTable'
 import RichText from '@/components/RichText'
 import { useTheme } from '@payloadcms/ui'
 import useSWR from 'swr'
-import fetcher from './fetcher'
+import fetcher from '../../../utilities/fetcher'
 import MD5 from '@/utilities/md5'
 import { ThemeContext } from '@/providers/Theme'
-import processData from './transferData'
+import processData from '../../../utilities/transferData'
 
 export interface IImage {
   url: string
