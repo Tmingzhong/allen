@@ -1,3 +1,11 @@
+/*
+ * @Author: tang.haoming
+ * @Date: 2024-10-26 04:20:58
+ * @LastEditors: tang.haoming
+ * @LastEditTime: 2024-11-10 21:09:29
+ * @FilePath: /allen/src/components/Media/ImageMedia/index.tsx
+ * @Description: 
+ */
 'use client'
 
 import type { StaticImageData } from 'next/image'
@@ -40,10 +48,11 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
       url,
       width: fullWidth,
     } = resource
-
+    const date = new Date();
+    const timestamp = date.getTime();
     width = fullWidth!
     height = fullHeight!
-    alt = altFromResource
+    alt = altFromResource?altFromResource:timestamp+''
 
     src = `${process.env.NEXT_PUBLIC_SERVER_URL}${url}`
   }
