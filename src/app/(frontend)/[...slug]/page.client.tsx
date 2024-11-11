@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-15 22:05:32
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-11 21:13:03
+ * @LastEditTime: 2024-11-12 00:12:34
  * @FilePath: /allen/src/app/(frontend)/[...slug]/page.client.tsx
  * @Description:
  */
@@ -93,7 +93,7 @@ function Page(props: {
     authar: pageData?.detailContent?.authar,
   })
 
-  const detailsAddress = `${pageData?.address}//${detailContent?.title}//${detailContent?.subTitle}//${detailContent?.source}//${detailContent?.authar}`
+  const detailsAddress = `${pageData?.address}\n${detailContent?.title}\n${detailContent?.subTitle}\n${detailContent?.source}\n${detailContent?.authar}`
 
   const text = isDetails ? detailsAddress : `${pageData?.address}`
 
@@ -102,7 +102,7 @@ function Page(props: {
       ? `/api/translate?` +
           new URLSearchParams({
             text: text,
-            to: lang === 'ko' ? 'kor' : lang,
+            to: lang,
           })
       : null,
     fetcher,
@@ -132,7 +132,7 @@ function Page(props: {
         console.log('123123123123123123123123')
         console.log(data)
         setTranslateData({
-          address: data?.trans_result[0]?.dst,
+          address: data?.translation[0],
           title: '',
           subTitle: '',
           source: '',
@@ -141,7 +141,7 @@ function Page(props: {
       } else {
         console.log('6666656567575467')
         console.log(data)
-        const array = data?.trans_result[0].dst.split('//')
+        const array = data?.translation[0]
         console.log(array)
         console.log(array[0])
 
@@ -187,7 +187,7 @@ function Page(props: {
   const handleChange = (value: string) => {
     // setLangValue(value)
     // router.push(`/${value}`)
-    window.open(`http://localhost:3000/${value}/home`, '_blank')
+    window.open(`${process.env.NEXT_PUBLIC_SERVER_URL}/${value}/home`, '_blank')
   }
 
   const tabItems: TabsProps['items'] = [
