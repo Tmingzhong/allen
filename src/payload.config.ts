@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-26 04:20:58
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-11 00:05:18
+ * @LastEditTime: 2024-11-11 22:45:03
  * @FilePath: /allen/src/payload.config.ts
  * @Description:
  */

@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-15 22:05:32
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-11 00:26:57
+ * @LastEditTime: 2024-11-11 21:13:03
  * @FilePath: /allen/src/app/(frontend)/[...slug]/page.client.tsx
  * @Description:
  */
@@ -45,7 +45,7 @@ interface IPage {
   createdAt: string
   _status: string
 }
- function Page(props: {
+function Page(props: {
   pageData: {
     // page: IPage
     resultZxdt: IPage[]
@@ -107,19 +107,18 @@ interface IPage {
       : null,
     fetcher,
   )
-  useEffect(()=>{
-    if(lang !='zh'&&pageData?.content){
+  useEffect(() => {
+    if (lang != 'zh' && pageData?.content) {
       setLoading(true)
       const copyContent = JSON.parse(JSON.stringify(pageData.content))
-      processData(copyContent,lang).then((data)=>{
-        if(data){
+      processData(copyContent, lang).then((data) => {
+        if (data) {
           setLoading(false)
           setContent(data)
         }
       })
     }
-  },[])
-
+  }, [])
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
@@ -128,18 +127,18 @@ interface IPage {
     } else {
       setLoading(false)
     }
-    if(data){
-      if(!isDetails){
+    if (data) {
+      if (!isDetails) {
         console.log('123123123123123123123123')
         console.log(data)
         setTranslateData({
           address: data?.trans_result[0]?.dst,
           title: '',
-          subTitle:  '',
-          source:  '',
-          authar:  '',
+          subTitle: '',
+          source: '',
+          authar: '',
         })
-      }else{
+      } else {
         console.log('6666656567575467')
         console.log(data)
         const array = data?.trans_result[0].dst.split('//')
@@ -154,9 +153,7 @@ interface IPage {
           authar: array[4] ? array[4] : '',
         })
       }
-
     }
-
   }, [data, isLoading, setLoading])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -439,8 +436,8 @@ interface IPage {
                 {translateData.title}
               </p>
               <div className="flex justify-around text-[#555555]">
-                <p>{`${dict.source}：${translateData.source&&translateData.source!='null' ? translateData.source : dict.unkown}`}</p>
-                <p>{`${dict.author}：${translateData.authar&&translateData.authar!='null' ? translateData.authar : dict.unkown}`}</p>
+                <p>{`${dict.source}：${translateData.source && translateData.source != 'null' ? translateData.source : dict.unkown}`}</p>
+                <p>{`${dict.author}：${translateData.authar && translateData.authar != 'null' ? translateData.authar : dict.unkown}`}</p>
                 <p>{`${dict.pubdate}：${pageData.detailContent.publishedAt ? pageData.detailContent.publishedAt.slice(0, 10) : dict.unkown}`}</p>
               </div>
               <div className="mt-8 mx-4 bg-red-100 p-4 text-start text-[#555555]">

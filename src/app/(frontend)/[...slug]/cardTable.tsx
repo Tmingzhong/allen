@@ -3,7 +3,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-27 16:41:51
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-10 15:41:42
+ * @LastEditTime: 2024-11-11 21:10:42
  * @FilePath: /allen/src/app/(frontend)/[...slug]/cardTable.tsx
  * @Description:
  */
@@ -68,9 +68,9 @@ const CardTable = (props: any) => {
             className=" w-full h-[220px] "
           >
             <div className="flex flex-row overflow-hidden bg-[#f7f7f7]">
-              {item?.image?.url?<img
+              {item?.image?<img
                 className="imgStyle"
-                src={`${process.env.NEXT_PUBLIC_SERVER_URL}/${item?.image?.url}`}
+                src={`${item?.image}`}
                 alt={item.image?.alt}
               />:null}
               <div className="flex flex-col overflow-hidden ml-2 ">

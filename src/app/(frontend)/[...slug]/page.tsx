@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-26 04:20:58
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-10 18:02:29
+ * @LastEditTime: 2024-11-11 21:12:48
  * @FilePath: /allen/src/app/(frontend)/[...slug]/page.tsx
  * @Description:
  */
@@ -41,9 +41,11 @@ const queryPageBySlug = cache(async (slug: string[]) => {
   const resultZxdt = await payload.find({
     collection: 'pages',
     limit: 4,
+    draft: false,
   })
   const resultYwgl = await payload.find({
     collection: 'pages',
+    draft: false,
     limit: slug[1] === 'home' ? 4 : 6,
     where: {
       type: {
@@ -53,6 +55,7 @@ const queryPageBySlug = cache(async (slug: string[]) => {
   })
   const resultJqgg = await payload.find({
     collection: 'pages',
+    draft: false,
     limit: slug[1] === 'home' ? 4 : 6,
     where: {
       type: {
@@ -62,6 +65,7 @@ const queryPageBySlug = cache(async (slug: string[]) => {
   })
   const resultJqzx = await payload.find({
     collection: 'pages',
+    draft: false,
     limit: slug[1] === 'home' ? 4 : 6,
     where: {
       type: {
@@ -71,6 +75,7 @@ const queryPageBySlug = cache(async (slug: string[]) => {
   })
   const resultJqhd = await payload.find({
     collection: 'pages',
+    draft: false,
     limit: slug[1] === 'home' ? 4 : 6,
     where: {
       type: {
@@ -80,6 +85,7 @@ const queryPageBySlug = cache(async (slug: string[]) => {
   })
   const resultSwhz = await payload.find({
     collection: 'pages',
+    draft: false,
     limit: slug[1] === 'home' ? 4 : 6,
     where: {
       type: {
@@ -90,6 +96,7 @@ const queryPageBySlug = cache(async (slug: string[]) => {
 
   const resultDetails = await payload.find({
     collection: 'pages',
+    draft: false,
     where: {
       slug: {
         equals: slug[2],
@@ -99,9 +106,11 @@ const queryPageBySlug = cache(async (slug: string[]) => {
 
   const header = await payload.findGlobal({
     slug: 'header',
+    draft: false,
   })
   const footer = await payload.findGlobal({
     slug: 'footer',
+    draft: false,
   })
   const dict = await getDictionary(slug && slug.length > 0 ? slug[0] : 'zh') // en
 
@@ -113,12 +122,12 @@ const queryPageBySlug = cache(async (slug: string[]) => {
     const jqhd = await translateListData(resultJqhd.docs, slug[0])
     const swhz = await translateListData(resultSwhz.docs, slug[0])
     return {
-      resultZxdt: zxdt || [],
-      resultYwgl: ywgl || [],
-      resultJqgg: jqgg || [],
-      resultJqzx: jqzx || [],
-      resultJqhd: jqhd || [],
-      resultSwhz: swhz || [],
+      resultZxdt: zxdt.filter((item) => item._status === 'published') || [],
+      resultYwgl: ywgl.filter((item) => item._status === 'published') || [],
+      resultJqgg: jqgg.filter((item) => item._status === 'published') || [],
+      resultJqzx: jqzx.filter((item) => item._status === 'published') || [],
+      resultJqhd: jqhd.filter((item) => item._status === 'published') || [],
+      resultSwhz: swhz.filter((item) => item._status === 'published') || [],
       imageList: header.images,
       address: footer.address,
       phone: footer.phone,

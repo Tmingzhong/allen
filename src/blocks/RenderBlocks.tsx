@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-26 04:20:58
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-06 21:05:43
+ * @LastEditTime: 2024-11-11 20:44:06
  * @FilePath: /allen/src/blocks/RenderBlocks.tsx
  * @Description: 
  */
@@ -11,12 +11,10 @@ import React, { Fragment } from 'react'
 
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { ContentBlock } from '@/blocks/Content/Component'
-import { MediaBlock } from '@/blocks/MediaBlock/Component'
 
 const blockComponents = {
   content: ContentBlock,
   cta: CallToActionBlock,
-  mediaBlock: MediaBlock,
 }
 
 export const RenderBlocks: React.FC<{

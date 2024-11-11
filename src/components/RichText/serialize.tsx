@@ -1,7 +1,6 @@
 import { BannerBlock } from '@/blocks/Banner/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { CodeBlock, CodeBlockProps } from '@/blocks/Code/Component'
-import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import React, { Fragment, JSX } from 'react'
 import { CMSLink } from '@/components/Link'
 import { DefaultNodeTypes, SerializedBlockNode } from '@payloadcms/richtext-lexical'
@@ -22,7 +21,6 @@ export type NodeTypes =
   | DefaultNodeTypes
   | SerializedBlockNode<
       | Extract<any, { blockType: 'cta' }>
-      | Extract<any, { blockType: 'mediaBlock' }>
       | any
       | CodeBlockProps
     >
@@ -110,18 +108,7 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
           switch (blockType) {
             case 'cta':
               return <CallToActionBlock key={index} {...block} />
-            case 'mediaBlock':
-              return (
-                <MediaBlock
-                  className="col-start-1 col-span-3"
-                  imgClassName="m-0"
-                  key={index}
-                  {...block}
-                  captionClassName="mx-auto max-w-[48rem]"
-                  enableGutter={false}
-                  disableInnerContainer={true}
-                />
-              )
+
             case 'banner':
               return <BannerBlock className="col-start-2 mb-4" key={index} {...block} />
             case 'code':

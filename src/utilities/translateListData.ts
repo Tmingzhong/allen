@@ -4,7 +4,7 @@ import MD5 from './md5'
  * @Author: tang.haoming
  * @Date: 2024-11-10 18:01:24
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-10 18:01:26
+ * @LastEditTime: 2024-11-11 21:12:24
  * @FilePath: /allen/src/utilities/translateListData.ts
  * @Description:
  */
@@ -39,11 +39,13 @@ async function translateText(text: string, lang) {
 async function translateListData(arr, lang) {
   if (arr && lang != 'zh') {
     for (let item of arr) {
-      if (item.title) {
-        item.title = await translateText(item.title, lang)
-      }
-      if (item.subTitle) {
-        item.subTitle = await translateText(item.title, lang)
+      if (item._status === 'published') {
+        if (item.title) {
+          item.title = await translateText(item.title, lang)
+        }
+        if (item.subTitle) {
+          item.subTitle = await translateText(item.title, lang)
+        }
       }
     }
   }
