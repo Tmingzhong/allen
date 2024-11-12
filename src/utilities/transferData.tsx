@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-11-10 15:05:31
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-12 23:58:22
+ * @LastEditTime: 2024-11-13 00:21:20
  * @FilePath: /allen/src/utilities/transferData.tsx
  * @Description:
  */
@@ -43,7 +43,7 @@ async function processData(arr, lang) {
 
   // 遍历数据，提取type为paragraph的text内容存到数组
   arr.forEach((item) => {
-    if (item.type === 'paragraph') {
+    if (item?.children && item.children.length > 0) {
       item.children.forEach((child: any) => {
         if (child.type === 'text') {
           if (child.text) {
@@ -57,13 +57,15 @@ async function processData(arr, lang) {
       })
     }
   })
+  console.log('originalTextsoriginalTexts')
+  console.log(originalTexts)
   if (originalTexts.length > 0) {
     const dataArray = await translateText(originalTexts, lang)
     let translatedIndex = 0
     let translatedData = JSON.parse(JSON.stringify(arr))
 
     translatedData.forEach((item) => {
-      if (item.type === 'paragraph') {
+      if (item?.children && item.children.length > 0) {
         item.children.forEach((child) => {
           if (child.type === 'text') {
             child.text = dataArray[translatedIndex] === 'allen' ? '' : dataArray[translatedIndex]
