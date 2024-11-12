@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-15 22:05:32
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-12 00:12:34
+ * @LastEditTime: 2024-11-12 22:37:00
  * @FilePath: /allen/src/app/(frontend)/[...slug]/page.client.tsx
  * @Description:
  */
@@ -93,7 +93,7 @@ function Page(props: {
     authar: pageData?.detailContent?.authar,
   })
 
-  const detailsAddress = `${pageData?.address}\n${detailContent?.title}\n${detailContent?.subTitle}\n${detailContent?.source}\n${detailContent?.authar}`
+  const detailsAddress = `${pageData?.address}//${detailContent?.title}//${detailContent?.subTitle}//${detailContent?.source}//${detailContent?.authar}`
 
   const text = isDetails ? detailsAddress : `${pageData?.address}`
 
@@ -127,7 +127,9 @@ function Page(props: {
     } else {
       setLoading(false)
     }
-    if (data) {
+    console.log('datadatadata-------')
+    console.log(data)
+    if (data && data?.translation) {
       if (!isDetails) {
         console.log('123123123123123123123123')
         console.log(data)
@@ -141,7 +143,7 @@ function Page(props: {
       } else {
         console.log('6666656567575467')
         console.log(data)
-        const array = data?.translation[0]
+        const array = data?.translation[0].split('//')
         console.log(array)
         console.log(array[0])
 
@@ -438,7 +440,7 @@ function Page(props: {
               <div className="flex justify-around text-[#555555]">
                 <p>{`${dict.source}：${translateData.source && translateData.source != 'null' ? translateData.source : dict.unkown}`}</p>
                 <p>{`${dict.author}：${translateData.authar && translateData.authar != 'null' ? translateData.authar : dict.unkown}`}</p>
-                <p>{`${dict.pubdate}：${pageData.detailContent.publishedAt ? pageData.detailContent.publishedAt.slice(0, 10) : dict.unkown}`}</p>
+                <p>{`${dict.pubdate}：${pageData.detailContent?.publishedAt ? pageData.detailContent.publishedAt.slice(0, 10) : dict.unkown}`}</p>
               </div>
               <div className="mt-8 mx-4 bg-red-100 p-4 text-start text-[#555555]">
                 {`${dict.summary}：${translateData.subTitle}`}
@@ -465,8 +467,14 @@ function Page(props: {
         )}
       </Content>
       <Footer style={{ textAlign: 'center', backgroundColor: 'black', color: '#999' }}>
-        <span> {`${dict.address}：${translateData.address}`}</span>
-        <span className="ml-8"> {`${dict.phone}：${pageData.phone}`}</span>
+        <span>
+          {' '}
+          {`${dict.address}：${translateData.address ? translateData.address : dict.unkown}`}
+        </span>
+        <span className="ml-8">
+          {' '}
+          {`${dict.phone}：${pageData.phone ? pageData.phone : dict.unkown}`}
+        </span>
       </Footer>
     </Layout>
   )

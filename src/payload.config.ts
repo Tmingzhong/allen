@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-26 04:20:58
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-11 22:45:03
+ * @LastEditTime: 2024-11-12 20:53:27
  * @FilePath: /allen/src/payload.config.ts
  * @Description:
  */
@@ -50,15 +50,7 @@ export default buildConfig({
     livePreview: {},
   },
   // This config helps us configure global or default features that the other editors can inherit
-  editor: lexicalEditor({
-    features: () => {
-      return [
-        BlocksFeature({
-          blocks: [ImageUrl],
-        }),
-      ]
-    },
-  }),
+  editor: lexicalEditor(),
   db: postgresAdapter({
     // prodMigrations: migrations,
     pool: {

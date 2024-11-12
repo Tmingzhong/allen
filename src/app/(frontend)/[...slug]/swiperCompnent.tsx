@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-26 21:55:14
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-10 11:19:12
+ * @LastEditTime: 2024-11-12 22:02:52
  * @FilePath: /allen/src/app/(frontend)/[...slug]/swiperCompnent.tsx
  * @Description:
  */
@@ -19,17 +19,18 @@ import { SoundOutlined } from '@ant-design/icons'
 import { Autoplay, Pagination, Navigation } from 'swiper/modules'
 import arrowDwon from '../../../../public/arrow-dwon.png'
 import { IImage } from './page.client'
-import { getDictionary } from '@/dictionaries';
+import { getDictionary } from '@/dictionaries'
 
 export interface IStepProgress {
   imageList: Array<IImage>
-  slug:string
-  title:string
-  dict:any
+  slug: string
+  title: string
+  dict: any
 }
-const swiperCompnent =  (props: IStepProgress) => {
-  const { imageList = [],title='',slug,dict } = props
-
+const swiperCompnent = (props: IStepProgress) => {
+  const { imageList = [], title = '', slug, dict } = props
+  console.log('imageListimageList')
+  console.log(imageList)
 
   return (
     <div className="homePage relative ">
@@ -47,18 +48,14 @@ const swiperCompnent =  (props: IStepProgress) => {
         modules={[Autoplay, Navigation]}
         className="mySwiper"
       >
-        {imageList&&imageList.map((item:any, index) => {
-          return (
-            <SwiperSlide key={item.id}>
-              <Image
-                className="swiperImage"
-                fill={true}
-                alt={item.alt}
-                src={`${process.env.NEXT_PUBLIC_SERVER_URL}/${item.image?.url}`}
-              />
-            </SwiperSlide>
-          )
-        })}
+        {imageList &&
+          imageList.map((item: any, index) => {
+            return (
+              <SwiperSlide key={item.id}>
+                <img className="swiperImage" alt={item.id} src={`${item.imageUrl}`} />
+              </SwiperSlide>
+            )
+          })}
       </Swiper>
 
       <div className="ui-arrow-down">
@@ -73,7 +70,7 @@ const swiperCompnent =  (props: IStepProgress) => {
               paddingRight: '8px',
             }}
           />
-          <a href={`/details/${slug}`} >{`${dict.zxdt}:${title}`}</a>
+          <a href={`/details/${slug}`}>{`${dict.zxdt}:${title}`}</a>
         </div>
         {/* <SlideNextButton /> */}
       </div>

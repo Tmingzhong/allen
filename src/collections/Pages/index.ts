@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-24 10:07:05
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-11 00:03:45
+ * @LastEditTime: 2024-11-12 22:22:20
  * @FilePath: /allen/src/collections/Pages/index.ts
  * @Description:
  */
@@ -125,9 +125,10 @@ export const Pages: CollectionConfig = {
         features: ({ rootFeatures }) => {
           return [
             ...rootFeatures,
-            HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
             FixedToolbarFeature(),
-            InlineToolbarFeature(),
+            BlocksFeature({
+              blocks: [ImageUrl],
+            }),
           ]
         },
       }),
