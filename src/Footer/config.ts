@@ -23,8 +23,13 @@ export const Footer: GlobalConfig = {
       type: 'text',
       label: '联系地址',
     },
+    // {
+    //   name: 'phone',
+    //   type: 'text',
+    //   label: '电话',
+    // },
     {
-      name: 'phone',
+      name: 'phoneNmuber',
       type: 'text',
       label: '电话',
     },
