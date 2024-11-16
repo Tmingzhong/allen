@@ -25,7 +25,7 @@ export const Footer: GlobalConfig = {
     },
     {
       name: 'phone',
-      type: 'number',
+      type: 'text',
       label: '电话',
     },
   ],
