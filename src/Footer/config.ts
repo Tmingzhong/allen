@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-24 10:07:05
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-10 19:41:33
+ * @LastEditTime: 2024-11-19 00:00:07
  * @FilePath: /allen/src/Footer/config.ts
  * @Description:
  */
@@ -25,7 +25,7 @@ export const Footer: GlobalConfig = {
     },
     {
       name: 'phone',
-      type: 'number',
+      type: 'text',
       label: '电话',
     },
   ],

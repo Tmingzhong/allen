@@ -177,7 +177,7 @@ export interface Header {
 export interface Footer {
   id: number;
   address?: string | null;
-  phone?: number | null;
+  phone?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
