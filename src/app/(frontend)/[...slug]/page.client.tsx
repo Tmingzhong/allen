@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-15 22:05:32
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-19 21:35:37
+ * @LastEditTime: 2024-11-19 22:29:03
  * @FilePath: /allen/src/app/(frontend)/[...slug]/page.client.tsx
  * @Description:
  */
@@ -446,6 +446,11 @@ function Page(props: {
           <div className=" mx-40 my-10 p-4 bg-white min-w-96">
             <Tabs
               activeKey={activeKey}
+              onChange={(e) => {
+                console.log('123123123123')
+                setActiveKey(e)
+                setCurrent(e)
+              }}
               tabBarExtraContent={
                 !isList ? (
                   <Button onClick={() => router.push(`/${lang}/list`)}>{`${dict.more}`}</Button>
