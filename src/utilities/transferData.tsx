@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-11-10 15:05:31
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-13 00:21:20
+ * @LastEditTime: 2024-11-19 21:36:21
  * @FilePath: /allen/src/utilities/transferData.tsx
  * @Description:
  */
@@ -17,9 +17,6 @@ async function translateText(textArray: string[], lang) {
   })
   const res = await b.json()
   if (res?.translation) {
-    console.log('666666666分段Array')
-    console.log(res)
-
     const data = res?.translation[0].split('//')
     return data
   } else {
@@ -57,8 +54,7 @@ async function processData(arr, lang) {
       })
     }
   })
-  console.log('originalTextsoriginalTexts')
-  console.log(originalTexts)
+
   if (originalTexts.length > 0) {
     const dataArray = await translateText(originalTexts, lang)
     let translatedIndex = 0

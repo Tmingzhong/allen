@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-11-03 13:45:59
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-09 21:47:25
+ * @LastEditTime: 2024-11-19 21:35:50
  * @FilePath: /allen/src/middleware.ts
  * @Description:
  */
@@ -30,7 +30,6 @@ const middleware = async (request: NextRequest) => {
     pathname.indexOf('api') === -1 &&
     pathname.indexOf('admin') === -1
   ) {
-    console.log('进这里来了？')
     // 重写
 
     if (pathname === '/') {
@@ -47,9 +46,6 @@ const middleware = async (request: NextRequest) => {
     pathname.indexOf('api') === -1 &&
     pathname.indexOf('admin') === -1
   ) {
-    console.log('进来了吗。。。。。')
-    console.log(pathname.slice(1))
-
     return NextResponse.redirect(new URL(`${pathname}/home`, request.url))
   }
   // if (

@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-15 22:05:32
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-12 22:37:00
+ * @LastEditTime: 2024-11-19 21:35:37
  * @FilePath: /allen/src/app/(frontend)/[...slug]/page.client.tsx
  * @Description:
  */
@@ -72,8 +72,6 @@ function Page(props: {
   const { dict, detailContent } = pageData
   const { setLoading } = useContext(ThemeContext)
 
-  console.log('渲染了 几次----------')
-  console.log(pageData)
   const isDetails = pageData.slug[1] === 'details'
   const isList = pageData.slug[1] === 'list'
   const isHome = pageData.slug[1] === 'home'
@@ -127,12 +125,9 @@ function Page(props: {
     } else {
       setLoading(false)
     }
-    console.log('datadatadata-------')
-    console.log(data)
+
     if (data && data?.translation) {
       if (!isDetails) {
-        console.log('123123123123123123123123')
-        console.log(data)
         setTranslateData({
           address: data?.translation[0],
           title: '',
@@ -141,11 +136,7 @@ function Page(props: {
           authar: '',
         })
       } else {
-        console.log('6666656567575467')
-        console.log(data)
         const array = data?.translation[0].split('//')
-        console.log(array)
-        console.log(array[0])
 
         setTranslateData({
           address: array[0],
@@ -177,7 +168,6 @@ function Page(props: {
   }, [pageData?.detailContent?.type, pageData.slug])
 
   const onClick = (e) => {
-    console.log('click ', e)
     setCurrent(e.key)
     if (e.key === 'home') {
       router.push(`/${lang}`)
@@ -248,7 +238,7 @@ function Page(props: {
 
     {
       key: 'jqhd',
-      label: dict.jqgg,
+      label: dict.jqhd,
       children: (
         <CardTable
           more={dict.more}
@@ -261,7 +251,7 @@ function Page(props: {
     },
     {
       key: 'swhz',
-      label: dict.jqgg,
+      label: dict.swhz,
       children: (
         <CardTable
           more={dict.more}
@@ -455,7 +445,7 @@ function Page(props: {
         ) : (
           <div className=" mx-40 my-10 p-4 bg-white min-w-96">
             <Tabs
-              defaultActiveKey={activeKey}
+              activeKey={activeKey}
               tabBarExtraContent={
                 !isList ? (
                   <Button onClick={() => router.push(`/${lang}/list`)}>{`${dict.more}`}</Button>
