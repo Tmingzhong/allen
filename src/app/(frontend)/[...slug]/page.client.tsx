@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-15 22:05:32
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-19 22:29:03
+ * @LastEditTime: 2024-11-20 20:30:32
  * @FilePath: /allen/src/app/(frontend)/[...slug]/page.client.tsx
  * @Description:
  */
@@ -16,7 +16,7 @@ import type { TabsProps } from 'antd'
 import Image from 'next/image'
 import logo from '../../../../public/logo.png'
 import { useRouter } from 'next/navigation'
-import background from '../../../../public/bg1.jpg'
+import background from '../../../../public/bg1.jpeg'
 
 const { Header, Content, Footer } = Layout
 import '../globals.css'
@@ -415,7 +415,7 @@ function Page(props: {
           />
         ) : (
           <Image
-            className=" w-full h-[500px] object-cover	"
+            className=" w-full h-[600px] object-cover	"
             alt={'background image'}
             src={background}
           />
