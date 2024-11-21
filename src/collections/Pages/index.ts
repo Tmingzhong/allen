@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-10-24 10:07:05
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-12 22:22:20
+ * @LastEditTime: 2024-11-21 20:30:19
  * @FilePath: /allen/src/collections/Pages/index.ts
  * @Description:
  */
@@ -103,7 +103,7 @@ export const Pages: CollectionConfig = {
           value: 'jqhd',
         },
         {
-          label: '景区公告',
+          label: '景区简介',
           value: 'jqgg',
         },
         {

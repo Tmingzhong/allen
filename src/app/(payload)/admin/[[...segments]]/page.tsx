@@ -2,7 +2,7 @@
  * @Author: tang.haoming
  * @Date: 2024-11-12 20:52:35
  * @LastEditors: tang.haoming
- * @LastEditTime: 2024-11-12 21:08:37
+ * @LastEditTime: 2024-11-21 20:30:58
  * @FilePath: /allen/src/app/(payload)/admin/[[...segments]]/page.tsx
  * @Description:
  */
@@ -26,7 +26,7 @@ type Args = {
 export function generateMetadata({ params }) {
   return {
     title: '管理后台',
-    description: '矮寨大桥管理后台',
+    description: '矮寨奇观旅游区管理后台',
   }
 }
 
