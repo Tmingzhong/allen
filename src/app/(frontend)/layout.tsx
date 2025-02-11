@@ -29,7 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html className={cn(GeistSans.variable, GeistMono.variable)} lang="en" suppressHydrationWarning>
       <head>
         <meta name="baidu-site-verification" content="codeva-lFzPDLoMNn" />
-        <meta name="robots" content="noindex,nofollow" />
+        
       </head>
       <body>
         <Providers>
